@@ -2,6 +2,9 @@ import classes from "./Posts.module.css";
 import React from "react";
 
 function Posts(props: any) {
+    console.log('props',props)
+
+
     return (
 
         <div className={classes.item}>

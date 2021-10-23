@@ -1,7 +1,8 @@
 import React from 'react'
 import classes from "./Dialogs.module.css";
 
-const Dialogs = (props: any) => {
+type DialogsPropsType = {message: string}
+const Dialogs = (props: DialogsPropsType) => {
     return (
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
