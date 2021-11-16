@@ -1,3 +1,11 @@
 .item {
     background-color: darksalmon;
 }
+
+.postsBlock {
+    padding: 10px;
+}
+
+.posts {
+    margin-bottom: 10px;
+}
