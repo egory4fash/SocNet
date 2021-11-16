@@ -6,21 +6,31 @@ import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from 'react-router-dom';
 
+type AppPropsType = {
+    dialogsData: Array<{ id: number, name: string }>,
+    messagesData: Array<{ id: number, message: string }>,
+    postsData: Array<{ id: number, message: string, likesCount: number }>
+}
 
-function App() {
+
+function App(props:AppPropsType) {
     return (
         <BrowserRouter>
-        <div className="app-wrapper">
-            <Header/>
-            <Navbar/>
-            <div className='app-wrapper-content'>
-                <Route path='/Dialogs' component={Dialogs}/>
-                <Route path='/Profile' component={Profile}/>
+            <div className="app-wrapper">
+                <Header/>
+                <Navbar/>
+                <div className='app-wrapper-content'>
+                    <Route path='/Dialogs' component={Dialogs}
+                    dialogsData = {props.dialogsData}
+                    messagesData = {props.messagesData}/>
+
+                    <Route path='/Profile' component={Profile}
+                    postsData = {props.postsData}/>
+                </div>
             </div>
-        </div>
         </BrowserRouter>
     )
 };
 
 
-    export default App;
+export default App;

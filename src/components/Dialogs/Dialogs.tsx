@@ -1,62 +1,24 @@
 import React from 'react'
 import classes from "./Dialogs.module.css";
-import {NavLink} from "react-router-dom";
+import {DialogItem} from "./DialogItem/DialogItem";
+import {Message} from "./Message/Message";
 
-type DialogItemProps = {
-    name: string,
-    id: number
+type dialogsPropsType = {
+    dialogsData: Array<{ id: number, name: string }>,
+    messagesData: Array<{ id: number, message: string }>
 }
 
-type MessagePropsType = {
-    message: string
-}
-
-// type dialogData =  {
-//   id: number,
-//   name: string
-// }
-//
-// type dialogsData = Array<dialogData>
+const Dialogs = (props.dialogsPropsType) => {
 
 
 
-const DialogItem = (props: DialogItemProps) => {
-    let path = '/dialogs/' + props.id;
-    return (<div className={classes.dialog}>
-        <NavLink to={path}>
-            {props.name}
-        </NavLink>
-    </div>)
-}
-
-const Message = (props: MessagePropsType) => {
-    return (
-        <div className={classes.message}>{props.message}</div>
-    )
-}
-
-
-
-const Dialogs = () => {
-
-    const dialogsData = [
-        {id: 1, name : "Ivan"},
-        {id: 2, name : "Sergey"},
-        {id: 3, name : "John"},
-        {id: 4, name : "Egor"},
-        {id: 5, name : "Anna"},]
-
-    const dialogsElements =dialogsData.map( (elem) =>
+    const dialogsElements = dialogsData.map((elem) =>
         <DialogItem name={elem.name} id={elem.id}/>
     )
 
-    const messagesData = [
-        {id: 1, message: "Hi"},
-        {id: 2, message: "Wazzup"},
-        {id: 3, message: "Yo"}
-    ]
 
-    const messageElements = messagesData.map( (elem) =>
+
+    const messageElements = messagesData.map((elem) =>
         <Message message={elem.message}/>
     )
 
