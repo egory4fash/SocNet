@@ -19,7 +19,7 @@ const messagesData: Array<{id:number,message:string}> = [
     {id: 3, message: "Yo"}
 ]
 
-const postsData: Array<{id:number,message:string,likesCount:number}> = [
+const postsData: Array<{ id: number, message: string, likesCount: number }> = [
     {id: 1, message: "1st post",likesCount :12},
     {id: 2, message: "2nd post bro",likesCount :23},
     {id: 3, message: "need 3rd?",likesCount :45}

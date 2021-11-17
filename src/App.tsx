@@ -13,24 +13,24 @@ type AppPropsType = {
 }
 
 
-function App(props:AppPropsType) {
+function App(props: AppPropsType) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/Dialogs' component={Dialogs}
-                    dialogsData = {props.dialogsData}
-                    messagesData = {props.messagesData}/>
+                    <Route path='/Dialogs'
+                           render={() =>
+                               <Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData}/>}/>
 
-                    <Route path='/Profile' component={Profile}
-                    postsData = {props.postsData}/>
+                    <Route path='/Profile'
+                           render={() => <Profile postsData={props.postsData}/>}/>
                 </div>
             </div>
         </BrowserRouter>
     )
-};
+}
 
 
 export default App;

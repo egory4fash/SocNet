@@ -8,17 +8,15 @@ type dialogsPropsType = {
     messagesData: Array<{ id: number, message: string }>
 }
 
-const Dialogs = (props.dialogsPropsType) => {
+const Dialogs = (props: dialogsPropsType) => {
 
 
-
-    const dialogsElements = dialogsData.map((elem) =>
+    const dialogsElements = props.dialogsData.map((elem) =>
         <DialogItem name={elem.name} id={elem.id}/>
     )
 
 
-
-    const messageElements = messagesData.map((elem) =>
+    const messageElements = props.messagesData.map((elem) =>
         <Message message={elem.message}/>
     )
 
