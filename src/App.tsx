@@ -7,42 +7,44 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from 'react-router-dom';
 
 type Poststype = {
-    id:number
+    id: number
     message: string
     likesCount: number
 }
 type MessagesType = {
-    id:number
-    message:string}
+    id: number
+    message: string
+}
 type DialogsType = {
-    id:number
+    id: number
     name: string
 
 }
 
 type ProfilePageType = {
-    postsData:Array<Poststype>
+    postsData: Array<Poststype>
 }
 
 type DialogsPageType = {
     messagesData: Array<MessagesType>
-    dialogsData:Array<DialogsType>
+    dialogsData: Array<DialogsType>
 }
 type SidebarType = {}
 
 
 type AppPropsType = {
-    profilePage:ProfilePageType
+    profilePage: ProfilePageType
     dialogsPage: DialogsPageType
-    sidebar:SidebarType
-    addPost:(postMessage:string) => void
+    sidebar: SidebarType
+    addPost: (postMessage: string) => void
+    addMessage: (newMessage: string) => void
 }
-
 
 
 function App(props: AppPropsType) {
     return (
         <BrowserRouter>
+
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
@@ -50,11 +52,12 @@ function App(props: AppPropsType) {
                     <Route path='/Dialogs'
                            render={() =>
                                <Dialogs dialogsData={props.dialogsPage.dialogsData}
-                                        messagesData={props.dialogsPage.messagesData}/>}/>
+                                        messagesData={props.dialogsPage.messagesData}
+                                        addMessage={props.addMessage}/>}/>
 
                     <Route path='/Profile'
                            render={() => <Profile postsData={props.profilePage.postsData}
-                           addPost = {props.addPost}/>}/>
+                                                  addPost={props.addPost}/>}/>
                 </div>
             </div>
         </BrowserRouter>

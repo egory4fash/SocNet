@@ -49,17 +49,25 @@ export const State : RootStateType = {
             {id: 1, name: "Ivan"},
             {id: 2, name: "Sergey"},
             {id: 3, name: "John"},
-            {id: 4, name: "Egor"},
-            {id: 5, name: "Anna"},]
+            ]
     },
     sidebar:{}
 }
 
-export const AddPost = (postMessage:string) => {
+export const addPost = (postMessage:string) => {
     const newPost:PostsType = {
         id:5,
         message: postMessage,
         likesCount:0
     }
     State.profilePage.postsData.push(newPost)
+}
+
+export const addMessage = (newMessage:string) => {
+    const newPostMessage:MessagesType = {
+        id:4,
+        message: newMessage,
+    }
+    State.dialogsPage.messagesData.push(newPostMessage)
+    State.dialogsPage.dialogsData.push({id:4,name:"NewComer"})
 }
