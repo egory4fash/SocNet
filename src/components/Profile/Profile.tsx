@@ -5,13 +5,15 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 type profilePropsType = {
     postsData: Array<{ id: number, message: string, likesCount: number }>
+    addPost: (postMessage: string) => void
 }
 
 function Profile(props: profilePropsType) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postsData={props.postsData}/>
+            <MyPosts postsData={props.postsData}
+            addPost = {props.addPost}/>
         </div>
     )
 }

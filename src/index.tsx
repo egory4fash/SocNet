@@ -4,11 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {State} from "./redux/State";
+import {AddPost} from "./redux/State";
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App dialogsPage={State.dialogsPage} profilePage={State.profilePage} sidebar={State.sidebar}/>
+    <App dialogsPage={State.dialogsPage}
+         profilePage={State.profilePage}
+         sidebar={State.sidebar}
+         addPost = {AddPost}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
