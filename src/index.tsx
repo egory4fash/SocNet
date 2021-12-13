@@ -3,21 +3,28 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {State} from "./redux/State";
+import {State, updateMessage} from "./redux/State";
 import {addPost} from "./redux/State";
 import {addMessage} from "./redux/State";
 
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App dialogsPage={State.dialogsPage}
-         profilePage={State.profilePage}
-         sidebar={State.sidebar}
-         addPost = {addPost}
-      addMessage = {addMessage}/>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export const reRenderEntireTree = () => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App dialogsPage={State.dialogsPage}
+                 profilePage={State.profilePage}
+                 sidebar={State.sidebar}
+                 addPost={addPost}
+                 addMessage={addMessage}
+                 updateMessage={updateMessage}
+            />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+
+}
+reRenderEntireTree()
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

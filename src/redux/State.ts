@@ -1,4 +1,6 @@
 
+import {reRenderEntireTree} from "../index";
+
 type PostsType = {
     id:number
     message: string
@@ -15,6 +17,7 @@ type DialogsType = {
 
 type ProfilePageType = {
     postsData:Array<PostsType>
+    newPostText:string
 }
 
 type DialogsPageType = {
@@ -37,7 +40,8 @@ export const State : RootStateType = {
             {id: 1, message: "1st post", likesCount: 12},
             {id: 2, message: "2nd post bro", likesCount: 23},
             {id: 3, message: "need 3rd?", likesCount: 45}
-        ]
+        ],
+        newPostText:'egory4'
     },
     dialogsPage: {
         messagesData: [
@@ -54,13 +58,15 @@ export const State : RootStateType = {
     sidebar:{}
 }
 
-export const addPost = (postMessage:string) => {
+export const addPost = () => {
     const newPost:PostsType = {
         id:5,
-        message: postMessage,
+        message: State.profilePage.newPostText,
         likesCount:0
     }
     State.profilePage.postsData.push(newPost)
+    State.profilePage.newPostText = ""
+    reRenderEntireTree()
 }
 
 export const addMessage = (newMessage:string) => {
@@ -70,4 +76,10 @@ export const addMessage = (newMessage:string) => {
     }
     State.dialogsPage.messagesData.push(newPostMessage)
     State.dialogsPage.dialogsData.push({id:4,name:"NewComer"})
+   reRenderEntireTree()
+}
+
+export const updateMessage = (updateMessage: string) => {
+    State.profilePage.newPostText = updateMessage
+    reRenderEntireTree()
 }

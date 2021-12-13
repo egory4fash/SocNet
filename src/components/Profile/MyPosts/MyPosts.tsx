@@ -4,7 +4,9 @@ import classes from "./MyPosts.module.css";
 
 type myPostsPropsType = {
     postsData: Array<{ id: number, message: string, likesCount: number }>
-    addPost:(postMessage:string) => void
+    addPost:() => void
+    newPostText:string
+    updateMessage: (updateMessage: string) => void
 }
 
 
@@ -17,14 +19,25 @@ function MyPosts(props: myPostsPropsType) {
     const NewPostElement:React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     const addPost = () => {
-        const postMessage = NewPostElement.current ? NewPostElement.current.value : ""
-        props.addPost(postMessage)
+
+        props.addPost()
+        props.updateMessage('')
+    }
+
+    const onPostChange = () => {
+        let text = NewPostElement.current ? NewPostElement.current.value : ""
+        props.updateMessage(text)
     }
     return (
 
         <div className={classes.postsBlock}>
             <h3>My posts</h3>
-            <div><textarea ref = {NewPostElement} className={classes.item}></textarea></div>
+            <div><textarea
+                onChange={onPostChange} ref = {NewPostElement}
+                           className={classes.item}
+                           value={props.newPostText}>
+
+            </textarea></div>
             <div>
                 <button onClick={addPost}>Add post</button>
             </div>

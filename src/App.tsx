@@ -23,6 +23,7 @@ type DialogsType = {
 
 type ProfilePageType = {
     postsData: Array<Poststype>
+    newPostText: string
 }
 
 type DialogsPageType = {
@@ -36,8 +37,9 @@ type AppPropsType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
-    addPost: (postMessage: string) => void
+    addPost: () => void
     addMessage: (newMessage: string) => void
+    updateMessage: (updateMessage: string) => void
 }
 
 
@@ -57,7 +59,9 @@ function App(props: AppPropsType) {
 
                     <Route path='/Profile'
                            render={() => <Profile postsData={props.profilePage.postsData}
-                                                  addPost={props.addPost}/>}/>
+                                                  addPost={props.addPost}
+                                                  newPostText={props.profilePage.newPostText}
+                                                  updateMessage={props.updateMessage}/>}/>
                 </div>
             </div>
         </BrowserRouter>
