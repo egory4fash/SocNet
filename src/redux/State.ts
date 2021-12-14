@@ -1,5 +1,5 @@
 
-import {reRenderEntireTree} from "../index";
+
 
 type PostsType = {
     id:number
@@ -26,12 +26,17 @@ type DialogsPageType = {
 }
 type SidebarType = {}
 
-type RootStateType = {
+export type RootStateType = {
     profilePage:ProfilePageType
     dialogsPage: DialogsPageType
     sidebar:SidebarType
 }
 
+let reRenderEntireTree = () => {
+    console.log('State changer')
+
+}
+type observerType = () => void
 
 
 export const State : RootStateType = {
@@ -82,4 +87,7 @@ export const addMessage = (newMessage:string) => {
 export const updateMessage = (updateMessage: string) => {
     State.profilePage.newPostText = updateMessage
     reRenderEntireTree()
+}
+export const subscriber =(observer:observerType) => {
+    reRenderEntireTree=observer
 }
