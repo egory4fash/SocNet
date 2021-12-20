@@ -33,7 +33,7 @@ export type RootStateType = {
 }
 
 let reRenderEntireTree = () => {
-    console.log('State changer')
+    console.log('State changed')
 
 }
 type observerType = () => void
