@@ -2,20 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {State, subscriber, updateMessage} from "./redux/State";
-import {addPost} from "./redux/State";
-import {addMessage} from "./redux/State";
+import {store} from "./redux/State";
+
+
 
 
  const reRenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App dialogsPage={State.dialogsPage}
-                 profilePage={State.profilePage}
-                 sidebar={State.sidebar}
-                 addPost={addPost}
-                 addMessage={addMessage}
-                 updateMessage={updateMessage}
+            <App dialogsPage={store._state.dialogsPage}
+                 profilePage={store._state.profilePage}
+                 sidebar={store._state.sidebar}
+                 addPost={store.addPost}
+                 addMessage={store.addMessage}
+                 updateMessage={store.updateMessage}
             />
         </React.StrictMode>,
         document.getElementById('root')
@@ -24,5 +24,5 @@ import {addMessage} from "./redux/State";
 }
 reRenderEntireTree()
 
-subscriber(reRenderEntireTree)
+store.subscriber(reRenderEntireTree)
 
