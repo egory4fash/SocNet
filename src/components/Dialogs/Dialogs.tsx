@@ -4,13 +4,11 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {addMessageAC, DispatchActionType} from "../../redux/State";
 
-
 type dialogsPropsType = {
     dialogsData: Array<{ id: number, name: string }>,
     messagesData: Array<{ id: number, message: string }>
     dispatch: (action:DispatchActionType) => void
 }
-
 const Dialogs = (props: dialogsPropsType) => {
 
 
