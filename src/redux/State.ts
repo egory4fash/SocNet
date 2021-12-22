@@ -41,20 +41,33 @@ export type StoreType = {
     dispatch: (action: DispatchActionType) => void
 }
 
-type UpdateMessageActionType = {
-    type: "UPDATE-MESSAGE",
-    updateMessage: string
-}
-type AddMessageActionType = {
-    type: "ADD-MESSAGE",
-    newMessage: string
-}
-type AddPostActionType = {
-    type: "ADD-POST"
+
+export type DispatchActionType =
+    ReturnType<typeof updateMessageAC> |
+    ReturnType<typeof addMessageAC> |
+    ReturnType<typeof addPostAC>
+
+
+
+export const updateMessageAC = (updateMessage:string) => {
+    return {
+        type:"UPDATE-MESSAGE",
+        updateMessage: updateMessage
+    } as const
 }
 
-export type DispatchActionType = UpdateMessageActionType | AddMessageActionType | AddPostActionType
+export const addMessageAC = (newMessage:string)=> {
+    return {
+        type:"ADD-MESSAGE",
+        newMessage:newMessage
+    } as const
+}
 
+export const addPostAC = ()=> {
+    return {
+        type:"ADD-POST",
+    } as const
+}
 
 export const store: StoreType = {
     _state: {
@@ -92,6 +105,7 @@ export const store: StoreType = {
     },
 
     dispatch(action) {
+        debugger
         if (action.type === "UPDATE-MESSAGE") {
             this._state.profilePage.newPostText = action.updateMessage
             this._callSubscriber()
@@ -113,6 +127,5 @@ export const store: StoreType = {
             this._state.profilePage.newPostText = ""
             this._callSubscriber()
         }
-
     }
 }

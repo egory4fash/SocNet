@@ -1,7 +1,7 @@
 import React from "react";
 import Posts from "./Posts/Posts";
 import classes from "./MyPosts.module.css";
-import {DispatchActionType} from "../../../redux/State";
+import {addPostAC, DispatchActionType, updateMessageAC} from "../../../redux/State";
 
 type myPostsPropsType = {
     postsData: Array<{ id: number, message: string, likesCount: number }>
@@ -20,13 +20,13 @@ function MyPosts(props: myPostsPropsType) {
 
     const addPost = () => {
 
-        props.dispatch({type:"ADD-POST"})
-        props.dispatch({type:"UPDATE-MESSAGE",updateMessage:''})
+        props.dispatch(addPostAC())
+        props.dispatch(updateMessageAC(""))
     }
 
     const onPostChange = () => {
         let text = NewPostElement.current ? NewPostElement.current.value : ""
-        props.dispatch({type:"UPDATE-MESSAGE",updateMessage:text})
+        props.dispatch(updateMessageAC(text))
     }
     return (
 

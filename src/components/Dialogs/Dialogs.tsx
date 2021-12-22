@@ -2,7 +2,7 @@ import React from 'react'
 import classes from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DispatchActionType} from "../../redux/State";
+import {addMessageAC, DispatchActionType} from "../../redux/State";
 
 
 type dialogsPropsType = {
@@ -26,7 +26,7 @@ const Dialogs = (props: dialogsPropsType) => {
 
     const addMessage = () => {
         const newMessage = NewMessageElement.current ? NewMessageElement.current.value : ""
-        props.dispatch({type:"ADD-MESSAGE",newMessage:newMessage})
+        props.dispatch(addMessageAC(newMessage))
     }
 
 
@@ -37,7 +37,7 @@ const Dialogs = (props: dialogsPropsType) => {
             <div className={classes.dialogsItems}>
 
                 {dialogsElements}
-                <div><textarea ref = {NewMessageElement} className={classes.item}></textarea></div>
+                <div><textarea ref = {NewMessageElement} className={classes.item}>yo</textarea></div>
                 <div>
                     <button onClick={addMessage}>Add post</button>
                 </div>
