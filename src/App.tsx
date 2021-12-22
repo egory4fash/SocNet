@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from 'react-router-dom';
-import {RootStateType, StoreType} from "./redux/State";
+import {DispatchActionType, RootStateType} from "./redux/State";
 
 type Poststype = {
     id: number
@@ -36,9 +36,7 @@ type SidebarType = {}
 
 type AppPropsType = {
    state:RootStateType
-    addPost: () => void
-    addMessage: (newMessage: string) => void
-    updateMessage: (updateMessage: string) => void
+    dispatch: (action:DispatchActionType) => void
 }
 
 
@@ -54,13 +52,13 @@ function App(props: AppPropsType) {
                            render={() =>
                                <Dialogs dialogsData={props.state.dialogsPage.dialogsData}
                                         messagesData={props.state.dialogsPage.messagesData}
-                                        addMessage={props.addMessage}/>}/>
+                                        dispatch={props.dispatch}/>}/>
 
                     <Route path='/Profile'
                            render={() => <Profile postsData={props.state.profilePage.postsData}
-                                                  addPost={props.addPost}
+                                                  dispatch={props.dispatch}
                                                   newPostText={props.state.profilePage.newPostText}
-                                                  updateMessage={props.updateMessage}/>}/>
+                                                 />}/>
                 </div>
             </div>
         </BrowserRouter>

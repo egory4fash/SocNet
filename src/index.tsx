@@ -11,9 +11,7 @@ import {store} from "./redux/State";
     ReactDOM.render(
         <React.StrictMode>
             <App state = {store.getState()}
-                 addPost={store.addPost.bind(store)}
-                 addMessage={store.addMessage.bind(store)}
-                 updateMessage={store.updateMessage.bind(store)}
+                 dispatch={store.dispatch.bind(store)}
             />
         </React.StrictMode>,
         document.getElementById('root')

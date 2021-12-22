@@ -2,12 +2,13 @@ import React from 'react'
 import classes from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
+import {DispatchActionType} from "../../redux/State";
 
 
 type dialogsPropsType = {
     dialogsData: Array<{ id: number, name: string }>,
     messagesData: Array<{ id: number, message: string }>
-    addMessage: (newMessage: string) => void
+    dispatch: (action:DispatchActionType) => void
 }
 
 const Dialogs = (props: dialogsPropsType) => {
@@ -25,7 +26,7 @@ const Dialogs = (props: dialogsPropsType) => {
 
     const addMessage = () => {
         const newMessage = NewMessageElement.current ? NewMessageElement.current.value : ""
-        props.addMessage(newMessage)
+        props.dispatch({type:"ADD-MESSAGE",newMessage:newMessage})
     }
 
 
