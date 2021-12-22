@@ -10,12 +10,10 @@ import {store} from "./redux/State";
  const reRenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App dialogsPage={store._state.dialogsPage}
-                 profilePage={store._state.profilePage}
-                 sidebar={store._state.sidebar}
-                 addPost={store.addPost}
-                 addMessage={store.addMessage}
-                 updateMessage={store.updateMessage}
+            <App state = {store.getState()}
+                 addPost={store.addPost.bind(store)}
+                 addMessage={store.addMessage.bind(store)}
+                 updateMessage={store.updateMessage.bind(store)}
             />
         </React.StrictMode>,
         document.getElementById('root')

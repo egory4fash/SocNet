@@ -41,7 +41,7 @@ export type StoreType = {
     addMessage :(newMessage:string) => void
     addPost : () => void
     subscriber: (callback: () => void) => void
-    _reRenderEntireTree: () => void
+    callSubscriber: () => void
     getState: () => RootStateType
 }
 export const store:StoreType = {
@@ -68,19 +68,18 @@ export const store:StoreType = {
     },
     sidebar:{}
 },
-    _reRenderEntireTree  ()  {
-        console.log('State changed')
-    },
+    callSubscriber  ()  {
+        console.log('State changed')},
     updateMessage (updateMessage: string) {
         this._state.profilePage.newPostText = updateMessage
-        this._reRenderEntireTree()},
+        this.callSubscriber()},
     addMessage (newMessage:string)  {
         const newPostMessage:MessagesType = {
             id:4,
             message: newMessage,}
         this._state.dialogsPage.messagesData.push(newPostMessage)
         this._state.dialogsPage.dialogsData.push({id:4,name:"NewComer"})
-        this._reRenderEntireTree()},
+        this.callSubscriber()},
     addPost  ()  {
         const newPost:PostsType = {
             id:5,
@@ -89,9 +88,9 @@ export const store:StoreType = {
         }
         this._state.profilePage.postsData.push(newPost)
         this._state.profilePage.newPostText = ""
-        this._reRenderEntireTree()},
+        this.callSubscriber()},
     subscriber(observer:observerType)  {
-        this._reRenderEntireTree=observer},
+        this.callSubscriber=observer},
     getState() {
          return this._state
     }
