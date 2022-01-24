@@ -1,3 +1,7 @@
+import {add_Post,  ProfileReducer, update_Message} from "./ProfileReducer";
+import {add_Message,  DialogsReducer} from "./DialogsReducer";
+import {SidebarReducer} from "./SidebarReducer";
+
 export type PostsType = {
     id: number
     message: string
@@ -30,6 +34,10 @@ export type RootStateType = {
     dialogsPage: DialogsPageType
     sidebar: SidebarType
 }
+export type DispatchActionType =
+    ReturnType<typeof updateMessageAC> |
+    ReturnType<typeof addPostAC>|
+    ReturnType<typeof addMessageAC>
 
 type observerType = () => void
 
@@ -42,38 +50,25 @@ export type StoreType = {
 }
 
 
-export type DispatchActionType =
-    ReturnType<typeof updateMessageAC> |
-    ReturnType<typeof addMessageAC> |
-    ReturnType<typeof addPostAC>
-
-
-
-
-
-const update_Message = "UPDATE-MESSAGE"
-const add_Message = "ADD-MESSAGE"
-const add_Post = "ADD-POST"
-
-export const updateMessageAC = (updateMessage:string) => {
+export const updateMessageAC = (updateMessage: string) => {
     return {
-        type:update_Message,
+        type: update_Message,
         updateMessage: updateMessage
     } as const
 }
 
-export const addMessageAC = (newMessage:string)=> {
+export const addPostAC = () => {
     return {
-        type:add_Message,
-        newMessage:newMessage
+        type: add_Post,
+    } as const
+}
+export const addMessageAC = (newMessage: string) => {
+    return {
+        type: add_Message,
+        newMessage: newMessage
     } as const
 }
 
-export const addPostAC = ()=> {
-    return {
-        type:add_Post,
-    } as const
-}
 
 export const store: StoreType = {
     _state: {
@@ -111,26 +106,9 @@ export const store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === update_Message) {
-            this._state.profilePage.newPostText = action.updateMessage
-            this._callSubscriber()
-        } else if (action.type === add_Message) {
-            const newPostMessage: MessagesType = {
-                id: 4,
-                message: action.newMessage,
-            }
-            this._state.dialogsPage.messagesData.push(newPostMessage)
-            this._state.dialogsPage.dialogsData.push({id: 4, name: "NewComer"})
-            this._callSubscriber()
-        } else if (action.type === add_Post) {
-            const newPost: PostsType = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.postsData.push(newPost)
-            this._state.profilePage.newPostText = ""
-            this._callSubscriber()
-        }
+        this._state.profilePage = ProfileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebar = SidebarReducer(this._state.sidebar, action)
+        this._callSubscriber()
     }
 }

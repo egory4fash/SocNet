@@ -1,7 +1,7 @@
 import React from "react";
 import Posts from "./Posts/Posts";
 import classes from "./MyPosts.module.css";
-import {addPostAC, DispatchActionType, updateMessageAC} from "../../../redux/State";
+import {addPostAC, DispatchActionType, updateMessageAC} from "../../../redux/ProfileReducer";
 
 type myPostsPropsType = {
     postsData: Array<{ id: number, message: string, likesCount: number }>

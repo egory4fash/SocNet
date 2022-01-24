@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Profile.module.css";
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {DispatchActionType} from "../../redux/State";
+import {DispatchActionType} from "../../redux/ProfileReducer";
 
 type profilePropsType = {
     postsData: Array<{ id: number, message: string, likesCount: number }>
