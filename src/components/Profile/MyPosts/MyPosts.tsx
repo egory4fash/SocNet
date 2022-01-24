@@ -1,12 +1,12 @@
 import React from "react";
 import Posts from "./Posts/Posts";
 import classes from "./MyPosts.module.css";
-import {addPostAC, DispatchActionType, updateMessageAC} from "../../../redux/ProfileReducer";
+import {addPostAC, ProfilePageActionType, updateMessageAC} from "../../../redux/ProfileReducer";
 
 type myPostsPropsType = {
     postsData: Array<{ id: number, message: string, likesCount: number }>
     newPostText:string
-    dispatch: (action:DispatchActionType) => void
+    dispatch: (action:ProfilePageActionType) => void
 }
 
 

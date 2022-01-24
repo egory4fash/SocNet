@@ -1,6 +1,6 @@
-import {add_Post,  ProfileReducer, update_Message} from "./ProfileReducer";
-import {add_Message,  DialogsReducer} from "./DialogsReducer";
-import {SidebarReducer} from "./SidebarReducer";
+import { ProfilePageActionType, ProfileReducer} from "./ProfileReducer";
+import { DialogActionType, DialogsReducer} from "./DialogsReducer";
+import {SidebarActionType, SidebarReducer} from "./SidebarReducer";
 
 export type PostsType = {
     id: number
@@ -35,9 +35,8 @@ export type RootStateType = {
     sidebar: SidebarType
 }
 export type DispatchActionType =
-    ReturnType<typeof updateMessageAC> |
-    ReturnType<typeof addPostAC>|
-    ReturnType<typeof addMessageAC>
+    DialogActionType | ProfilePageActionType | SidebarActionType
+
 
 type observerType = () => void
 
@@ -50,24 +49,7 @@ export type StoreType = {
 }
 
 
-export const updateMessageAC = (updateMessage: string) => {
-    return {
-        type: update_Message,
-        updateMessage: updateMessage
-    } as const
-}
 
-export const addPostAC = () => {
-    return {
-        type: add_Post,
-    } as const
-}
-export const addMessageAC = (newMessage: string) => {
-    return {
-        type: add_Message,
-        newMessage: newMessage
-    } as const
-}
 
 
 export const store: StoreType = {

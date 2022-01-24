@@ -1,15 +1,17 @@
-import {DispatchActionType, PostsType, ProfilePageType,} from "./State";
+import { PostsType, ProfilePageType,} from "./State";
 
 export const update_Message = "UPDATE-MESSAGE"
 export const add_Post = "ADD-POST"
 
+export type ProfilePageActionType = updateMessageACType | addPostACType
+type updateMessageACType = ReturnType<typeof updateMessageAC>
+type addPostACType = ReturnType<typeof addPostAC>
 
-
-export const ProfileReducer = (state: ProfilePageType, action: DispatchActionType) => {
+export const ProfileReducer = (state: ProfilePageType, action: ProfilePageActionType) => {
     switch (action.type) {
         case "UPDATE-MESSAGE": {
             state.newPostText = action.updateMessage
-            return  state
+            return state
         }
         case "ADD-POST" : {
             const newPost: PostsType = {
@@ -21,12 +23,11 @@ export const ProfileReducer = (state: ProfilePageType, action: DispatchActionTyp
             state.newPostText = ""
             return state
         }
-        default:return state
+        default:
+            return state
     }
 
 }
-
-
 
 
 export const updateMessageAC = (updateMessage: string) => {

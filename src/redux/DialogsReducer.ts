@@ -1,12 +1,13 @@
-import {DialogsPageType, DispatchActionType, MessagesType} from "./State";
-
-
+import {DialogsPageType, MessagesType} from "./State";
 
 
 export const add_Message = "ADD-MESSAGE"
 
+export type DialogActionType = addMessageACType
 
-export const DialogsReducer = (state: DialogsPageType, action: DispatchActionType) => {
+type  addMessageACType = ReturnType<typeof addMessageAC>
+
+export const DialogsReducer = (state: DialogsPageType, action: DialogActionType) => {
     switch (action.type) {
         case "ADD-MESSAGE" : {
             const newPostMessage: MessagesType = {
