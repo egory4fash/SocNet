@@ -35,12 +35,13 @@ type SidebarType = {}
 
 
 type AppPropsType = {
-   state:RootStateType
+    state: RootStateType
     dispatch: (action:DispatchActionType) => void
 }
 
 
 function App(props: AppPropsType) {
+    console.log(props, 'Props')
     return (
         <BrowserRouter>
 

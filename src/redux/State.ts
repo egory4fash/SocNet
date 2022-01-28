@@ -33,6 +33,9 @@ export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
+    // profile: ProfilePageType
+    // dialogs: DialogsPageType
+    // sidebar: SidebarType
 }
 export type DispatchActionType =
     DialogActionType | ProfilePageActionType | SidebarActionType

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {store} from "./redux/State";
+import {store} from "./redux/Redux-Store";
 
 
 
@@ -20,5 +20,5 @@ import {store} from "./redux/State";
 }
 reRenderEntireTree()
 
-store.subscriber(reRenderEntireTree)
+// store.subscriber(reRenderEntireTree)
 
