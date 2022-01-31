@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./Profile.module.css";
-import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ProfilePageActionType} from "../../redux/ProfileReducer";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 type profilePropsType = {
     postsData: Array<{ id: number, message: string, likesCount: number }>
@@ -14,7 +14,7 @@ function Profile(props: profilePropsType) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts
+            <MyPostsContainer
                 postsData={props.postsData}
                 newPostText={props.newPostText}
                 dispatch={props.dispatch}/>

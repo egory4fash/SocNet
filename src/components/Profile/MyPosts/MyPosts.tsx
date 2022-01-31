@@ -1,12 +1,13 @@
 import React from "react";
 import Posts from "./Posts/Posts";
 import classes from "./MyPosts.module.css";
-import {addPostAC, ProfilePageActionType, updateMessageAC} from "../../../redux/ProfileReducer";
+
 
 type myPostsPropsType = {
     postsData: Array<{ id: number, message: string, likesCount: number }>
     newPostText:string
-    dispatch: (action:ProfilePageActionType) => void
+    onPostChange:(text:string) => void
+    addPost:() => void
 }
 
 
@@ -19,21 +20,19 @@ function MyPosts(props: myPostsPropsType) {
     const NewPostElement:React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     const addPost = () => {
-
-        props.dispatch(addPostAC())
-        props.dispatch(updateMessageAC(""))
+        props.addPost()
     }
 
-    const onPostChange = () => {
+    const onPostChangeHandler = () => {
         let text = NewPostElement.current ? NewPostElement.current.value : ""
-        props.dispatch(updateMessageAC(text))
+        props.onPostChange(text)
     }
     return (
 
         <div className={classes.postsBlock}>
             <h3>My posts</h3>
             <div><textarea
-                onChange={onPostChange} ref = {NewPostElement}
+                onChange={onPostChangeHandler} ref = {NewPostElement}
                            className={classes.item}
                            value={props.newPostText}>
 
