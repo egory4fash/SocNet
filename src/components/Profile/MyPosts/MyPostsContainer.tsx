@@ -1,37 +1,39 @@
 import React from "react";
 import classes from "./MyPosts.module.css";
 import {addPostAC, ProfilePageActionType, updateMessageAC} from "../../../redux/ProfileReducer";
+import {MyPosts} from "./MyPosts";
+import {RootStateType} from "../../../redux/State";
+import { ReduxStateType} from "../../../redux/Redux-Store";
+import {Store} from "redux";
 
 type myPostsPropsType = {
-    postsData: Array<{ id: number, message: string, likesCount: number }>
-    newPostText: string
-    dispatch: (action: ProfilePageActionType) => void
+  store:Store
 }
 
 
-function MyPosts(props: myPostsPropsType) {
+export function MyPostsContainer(props: myPostsPropsType) {
 
-
+    const state = props.store.getState()
     const addPost = () => {
-        props.dispatch(addPostAC())
-        props.dispatch(updateMessageAC(""))
+
+        props.store.dispatch(addPostAC())
+        props.store.dispatch(updateMessageAC(""))
     }
 
     const onPostChange = (text: string) => {
-        props.dispatch(updateMessageAC(text))
+        props.store.dispatch(updateMessageAC(text))
     }
-
+    console.log(state.profilePage)
 
     return (
 
         <div className={classes.postsBlock}>
             <MyPosts
-                postsData={props.postsData}
-                newPostText={props.newPostText}
-                onPostChange={onPostChange}
-                addpost={addPost}/>
+                postsData={state.profilePage.postsData}
+                newPostText={state.profilePage.newPostText}
+                onPostChangeTest={onPostChange}
+                addPost={addPost}/>
         </div>
     )
 }
 
-export default MyPosts;

@@ -4,7 +4,7 @@ import {DialogsReducer} from "./DialogsReducer";
 import {SidebarReducer} from "./SidebarReducer";
 
 
-
+export type ReduxStateType = ReturnType<typeof reducersBatch>
 
 
 export let reducersBatch = combineReducers({

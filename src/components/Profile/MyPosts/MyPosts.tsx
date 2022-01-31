@@ -4,14 +4,18 @@ import classes from "./MyPosts.module.css";
 
 
 type myPostsPropsType = {
-    postsData: Array<{ id: number, message: string, likesCount: number }>
+    postsData: Array<{
+        id: number,
+        message: string,
+        likesCount: number
+    }>
     newPostText:string
-    onPostChange:(text:string) => void
+    onPostChangeTest:(text:string) => void
     addPost:() => void
 }
 
 
-function MyPosts(props: myPostsPropsType) {
+export function MyPosts(props: myPostsPropsType) {
 
 
     const postElements = props.postsData.map(elem =>
@@ -25,11 +29,9 @@ function MyPosts(props: myPostsPropsType) {
 
     const onPostChangeHandler = () => {
         let text = NewPostElement.current ? NewPostElement.current.value : ""
-        props.onPostChange(text)
+        props.onPostChangeTest(text)
     }
-    return (
-
-        <div className={classes.postsBlock}>
+    return (<div className={classes.postsBlock}>
             <h3>My posts</h3>
             <div><textarea
                 onChange={onPostChangeHandler} ref = {NewPostElement}
@@ -43,8 +45,6 @@ function MyPosts(props: myPostsPropsType) {
             <div className={classes.posts}>
                 {postElements}
             </div>
-        </div>
-    )
+        </div>)
 }
 
-export default MyPosts;

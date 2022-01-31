@@ -21,7 +21,7 @@ export const ProfileReducer = (state:ProfilePageType = initialProfileState, acti
     switch (action.type) {
         case "UPDATE-MESSAGE": {
             state.newPostText = action.updateMessage
-            return state
+            return {...state}
         }
         case "ADD-POST" : {
             const newPost: PostsType = {
@@ -31,7 +31,7 @@ export const ProfileReducer = (state:ProfilePageType = initialProfileState, acti
             }
             state.postsData.push(newPost)
             state.newPostText = ""
-            return state
+            return {...state}
         }
         default:
             return state
