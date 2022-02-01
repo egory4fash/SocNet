@@ -35,15 +35,15 @@ import {Store} from "redux";
 // type SidebarType = {}
 
 
-export type AppPropsType = {
-    state: RootStateType
-    dispatch: (action: DispatchActionType) => void
-    store: Store
-}
+// export type AppPropsType = {
+//     state: RootStateType
+//     dispatch: (action: DispatchActionType) => void
+//     store: Store
+// }
 
 
-function App(props: AppPropsType) {
-   
+function App() {
+
     return (
         <BrowserRouter>
 
@@ -51,17 +51,15 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/Dialogs'
-                           render={() =>
-                               <Dialogs dialogsData={props.state.dialogsPage.dialogsData}
-                                        messagesData={props.state.dialogsPage.messagesData}
-                                        dispatch={props.dispatch}/>}/>
+                    {/*<Route path='/Dialogs'*/}
+                    {/*       render={() =>*/}
+                    {/*           <Dialogs />}/>*/}
 
                     <Route path='/Profile'
                            // render={() => <Profile postsData={props.state.profilePage.postsData}
                            //                        dispatch={props.dispatch}
                            //                        newPostText={props.state.profilePage.newPostText}
-                           render={() => <Profile  store={props.store}
+                           render={() => <Profile
 
                            />}/>
                 </div>

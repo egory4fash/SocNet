@@ -5,18 +5,18 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {Store} from "redux";
 
 
-export type profilePropsType = {
-    // postsData: Array<{ id: number, message: string, likesCount: number }>
-    // newPostText: string
-    // dispatch: (action:ProfilePageActionType) => void
-    store: Store
-}
+// export type profilePropsType = {
+//     // postsData: Array<{ id: number, message: string, likesCount: number }>
+//     // newPostText: string
+//     // dispatch: (action:ProfilePageActionType) => void
+//     store: Store
+// }
 
-function Profile(props: profilePropsType) {
+function Profile() {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store = {props.store}/>
+            <MyPostsContainer />
         </div>
     )
 }
