@@ -2,30 +2,27 @@ import React from 'react'
 import classes from "./Dialogs.module.css";
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {addMessageAC} from "../../redux/DialogsReducer"
-import {DispatchActionType} from "../../redux/State";
+import {DialogsPropsType} from "./DialogsContainer";
 
-type dialogsPropsType = {
-    dialogsData: Array<{ id: number, name: string }>,
-    messagesData: Array<{ id: number, message: string }>
-    dispatch: (action:DispatchActionType) => void
-}
-const Dialogs = (props: dialogsPropsType) => {
+
+const Dialogs = (props: DialogsPropsType) => {
 
 
     const dialogsElements = props.dialogsData.map((elem) =>
-        <DialogItem name={elem.name} id={elem.id}/>
+        <DialogItem key={elem.id} name={elem.name} id={elem.id}/>
     )
 
 
     const messageElements = props.messagesData.map((elem) =>
-        <Message message={elem.message}/>
+        <Message key={elem.id} message={elem.message}/>
     )
-    const NewMessageElement:React.RefObject<HTMLTextAreaElement> = React.createRef()
+    const NewMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
     const addMessage = () => {
+
         const newMessage = NewMessageElement.current ? NewMessageElement.current.value : ""
-        props.dispatch(addMessageAC(newMessage))
+        console.log(newMessage)
+        props.addMessage(newMessage)
     }
 
 
@@ -36,7 +33,14 @@ const Dialogs = (props: dialogsPropsType) => {
             <div className={classes.dialogsItems}>
 
                 {dialogsElements}
-                <div><textarea ref = {NewMessageElement} className={classes.item} placeholder={'Enter your message'}></textarea></div>
+                <div>
+                    <textarea
+                        ref={NewMessageElement}
+                        className={classes.item}
+                        placeholder={'Enter your message'}>
+                </textarea>
+                </div>
+
                 <div>
                     <button onClick={addMessage}>Add message</button>
                 </div>
@@ -44,8 +48,6 @@ const Dialogs = (props: dialogsPropsType) => {
             </div>
             <div className={classes.messages}>
                 {messageElements}
-
-
             </div>
         </div>
     )

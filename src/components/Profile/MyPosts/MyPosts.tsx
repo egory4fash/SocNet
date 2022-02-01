@@ -1,6 +1,7 @@
 import React from "react";
 import Posts from "./Posts/Posts";
 import classes from "./MyPosts.module.css";
+import {MyPostsPropsType} from "./MyPostsContainer";
 
 
 type myPostsPropsType = {
@@ -15,7 +16,7 @@ type myPostsPropsType = {
 }
 
 
-export function MyPosts(props: myPostsPropsType) {
+export function MyPosts(props: MyPostsPropsType) {
 
 
     const postElements = props.postsData.map(elem =>
@@ -29,7 +30,7 @@ export function MyPosts(props: myPostsPropsType) {
 
     const onPostChangeHandler = () => {
         let text = NewPostElement.current ? NewPostElement.current.value : ""
-        props.onPostChangeTest(text)
+        props.onPostChange(text)
     }
     return (<div className={classes.postsBlock}>
             <h3>My posts</h3>

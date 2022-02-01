@@ -7,6 +7,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from 'react-router-dom';
 import {DispatchActionType, RootStateType} from "./redux/State";
 import {Store} from "redux";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 // type Poststype = {
 //     id: number
@@ -51,17 +52,13 @@ function App() {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    {/*<Route path='/Dialogs'*/}
-                    {/*       render={() =>*/}
-                    {/*           <Dialogs />}/>*/}
+                    <Route path='/Dialogs'
+                           render={() =>
+                               <DialogsContainer/>}/>
 
                     <Route path='/Profile'
-                           // render={() => <Profile postsData={props.state.profilePage.postsData}
-                           //                        dispatch={props.dispatch}
-                           //                        newPostText={props.state.profilePage.newPostText}
-                           render={() => <Profile
 
-                           />}/>
+                           render={() => <Profile/>}/>
                 </div>
             </div>
         </BrowserRouter>

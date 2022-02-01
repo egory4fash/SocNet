@@ -27,9 +27,7 @@ export const DialogsReducer = (state: DialogsPageType = initialDialogState, acti
                 id: 4,
                 message: action.newMessage,
             }
-            state.messagesData.push(newPostMessage)
-            state.dialogsData.push({id: 4, name: "NewComer"})
-            return state
+            return {...state,messagesData:state.messagesData=[...state.messagesData,newPostMessage]}
         }
         default:
             return state
