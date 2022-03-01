@@ -27,7 +27,8 @@ export const DialogsReducer = (state: DialogsPageType = initialDialogState, acti
                 id: 4,
                 message: action.newMessage,
             }
-            return {...state,messagesData:state.messagesData=[...state.messagesData,newPostMessage]}
+            let newState = {...state}
+            return {...newState,messagesData:newState.messagesData=[...newState.messagesData,newPostMessage]}
         }
         default:
             return state
