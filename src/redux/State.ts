@@ -29,6 +29,18 @@ export type DialogsPageType = {
 
 export type SidebarType = {}
 
+export type UsersType = Array<UserType>
+export type UserType = {
+    id:number,
+    followed:boolean,
+    fullName:string,
+    status:string,
+    location:UserLocationType
+}
+export type UserLocationType = {
+    city:string,country:string
+}
+
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType

@@ -4,6 +4,7 @@ export const update_Message = "UPDATE-MESSAGE"
 export const add_Post = "ADD-POST"
 
 export type ProfilePageActionType = updateMessageACType | addPostACType
+
 type updateMessageACType = ReturnType<typeof updateMessageAC>
 type addPostACType = ReturnType<typeof addPostAC>
 
