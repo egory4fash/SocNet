@@ -1,6 +1,7 @@
 import { ProfilePageActionType} from "./ProfileReducer";
 import { DialogActionType} from "./DialogsReducer";
 import {SidebarActionType} from "./SidebarReducer";
+import {UsersReducer} from "./UsersReducer";
 
 export type PostsType = {
     id: number
@@ -29,9 +30,13 @@ export type DialogsPageType = {
 
 export type SidebarType = {}
 
+export type GlobalUsersType = {
+    users:UsersType
+}
 export type UsersType = Array<UserType>
 export type UserType = {
     id:number,
+    photoURL:string
     followed:boolean,
     fullName:string,
     status:string,
@@ -45,6 +50,7 @@ export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
+    usersPage:GlobalUsersType
 
 }
 export type DispatchActionType =

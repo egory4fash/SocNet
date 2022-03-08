@@ -8,7 +8,8 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {DispatchActionType, RootStateType} from "./redux/State";
 import {Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import { Users } from './components/Users/Users';
+import UsersContainer from './components/Users/UsersContainer';
+
 
 // type Poststype = {
 //     id: number
@@ -61,7 +62,7 @@ function App() {
                            render={() => <Profile/>}/>
 
                     <Route path='/Users'
-                           render={() => <Users/>}/>
+                           render={() => <UsersContainer/>}/>
                 </div>
             </div>
         </BrowserRouter>
