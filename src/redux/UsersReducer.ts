@@ -12,30 +12,7 @@ export const setUsers = "SET-USERS"
 
 let initialUsersState = {
     users: [
-        {
-            id: 1,
-            photoURL: 'https://www.clipartmax.com/png/small/248-2487966_matthew-man-avatar-icon-png.png',
-            followed: true,
-            fullName: "Egor",
-            status: "No brain-no pain",
-            location: {city: "Verkhnedvinsk", country: "Belarus"}
-        },
-        {
-            id: 2,
-            photoURL: 'https://www.clipartmax.com/png/small/248-2487966_matthew-man-avatar-icon-png.png',
-            followed: false,
-            fullName: "Anna",
-            status: "Anime RULEZ",
-            location: {city: "Vitebsk", country: "Belarus"}
-        },
-        {
-            id: 3,
-            photoURL: 'https://www.clipartmax.com/png/small/248-2487966_matthew-man-avatar-icon-png.png',
-            followed: true,
-            fullName: "Dina",
-            status: "------",
-            location: {city: "Kyiv", country: "Ukraine"}
-        },
+
     ]
 }
 
