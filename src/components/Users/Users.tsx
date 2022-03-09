@@ -1,5 +1,10 @@
 import React from 'react'
 import {UsersPagePropsType} from "./UsersContainer";
+import axios from "axios";
+// import * as axios from 'axios'
+
+
+
 
 export const Users = (props: UsersPagePropsType) => {
 
@@ -10,32 +15,38 @@ export const Users = (props: UsersPagePropsType) => {
     }
 
     if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: 1,
-                photoURL: 'https://www.clipartmax.com/png/small/248-2487966_matthew-man-avatar-icon-png.png',
-                followed: true,
-                fullName: "Egor",
-                status: "No brain-no pain",
-                location: {city: "Verkhnedvinsk", country: "Belarus"}
-            },
-            {
-                id: 2,
-                photoURL: 'https://www.clipartmax.com/png/small/248-2487966_matthew-man-avatar-icon-png.png',
-                followed: false,
-                fullName: "Anna",
-                status: "Anime RULEZ",
-                location: {city: "Vitebsk", country: "Belarus"}
-            },
-            {
-                id: 3,
-                photoURL: 'https://www.clipartmax.com/png/small/248-2487966_matthew-man-avatar-icon-png.png',
-                followed: true,
-                fullName: "Dina",
-                status: "------",
-                location: {city: "Kyiv", country: "Ukraine"}
-            },
-        ])
+
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+            debugger
+            props.setUsers(response.data.items)
+        })
+
+        // props.setUsers([
+        //     {
+        //         id: 1,
+        //         photoURL: 'https://www.clipartmax.com/png/small/248-2487966_matthew-man-avatar-icon-png.png',
+        //         followed: true,
+        //         fullName: "Egor",
+        //         status: "No brain-no pain",
+        //         location: {city: "Verkhnedvinsk", country: "Belarus"}
+        //     },
+        //     {
+        //         id: 2,
+        //         photoURL: 'https://www.clipartmax.com/png/small/248-2487966_matthew-man-avatar-icon-png.png',
+        //         followed: false,
+        //         fullName: "Anna",
+        //         status: "Anime RULEZ",
+        //         location: {city: "Vitebsk", country: "Belarus"}
+        //     },
+        //     {
+        //         id: 3,
+        //         photoURL: 'https://www.clipartmax.com/png/small/248-2487966_matthew-man-avatar-icon-png.png',
+        //         followed: true,
+        //         fullName: "Dina",
+        //         status: "------",
+        //         location: {city: "Kyiv", country: "Ukraine"}
+        //     },
+        // ])
     }
 
     return (
