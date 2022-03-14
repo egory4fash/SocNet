@@ -1,16 +1,17 @@
 import {connect} from "react-redux";
-import {Users} from "./Users";
 import {RootStateType, UsersType} from "../../redux/State";
 import {Dispatch} from "redux";
 import {changeFollowAC, setUsersAC} from "../../redux/UsersReducer";
+import usersClass from "./UsersClass";
+import {Users} from "./Users";
 
 
 export type UsersPagePropsType = mapStateToPropsType & mapDispatchToPropsType
 
-type mapStateToPropsType = {
+export type mapStateToPropsType = {
     users:UsersType
 }
-type mapDispatchToPropsType = {
+export type mapDispatchToPropsType = {
     changeFollow:(id:number) => void,
     setUsers:(users:UsersType) => void
 }
@@ -34,4 +35,4 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 
 export default connect<mapStateToPropsType,mapDispatchToPropsType,
     {},
-    RootStateType >(mapStateToProps, mapDispatchToProps)(Users)
+    RootStateType >(mapStateToProps, mapDispatchToProps)(usersClass)
