@@ -6,13 +6,12 @@ import {mapDispatchToPropsType, mapStateToPropsType} from "./UsersContainer";
 type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 class usersClass extends React.Component<UsersPropsType> {
-    constructor(props: UsersPropsType) {
-        super(props);
+
+    componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
             debugger
             this.props.setUsers(response.data.items)
         })
-
     }
 
 
