@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from "axios";
 import {mapDispatchToPropsType, mapStateToPropsType} from "./UsersContainer";
+import s from 'UsersClass.module.css'
 
 
 type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -18,6 +19,13 @@ class usersClass extends React.Component<UsersPropsType> {
     render() {
         return (
             <div>
+                <div>
+                    <span>1</span>
+                    <span className = {s.selected}>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
                 {this.props.users.map(m =>
                     <div key={m.id}>
                         <span>
