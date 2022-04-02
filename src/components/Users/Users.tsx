@@ -3,7 +3,6 @@ import {UsersPagePropsType} from "./UsersContainer";
 import axios from "axios";
 
 
-
 export const Users = (props: UsersPagePropsType) => {
 
     const style = {
@@ -26,7 +25,7 @@ export const Users = (props: UsersPagePropsType) => {
                 <div key={m.id}>
 <span>
 <div>
-    <img style={style} src={m.photoURL}/>
+    <img style={style} src={m.photos.small ? m.photos.small : ''} alt={'photo'}/>
 </div>
     <div>
         {m.followed ?
@@ -37,7 +36,7 @@ export const Users = (props: UsersPagePropsType) => {
 </span>
                     <span>
                         <span>
-                            <div>{m.fullName}</div>
+                            <div>{m.name}</div>
                             <div>{m.status}</div>
                         </span>
                         <span>

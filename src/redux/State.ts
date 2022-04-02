@@ -2,6 +2,7 @@ import { ProfilePageActionType} from "./ProfileReducer";
 import { DialogActionType} from "./DialogsReducer";
 import {SidebarActionType} from "./SidebarReducer";
 import {UsersReducer} from "./UsersReducer";
+import usersClass from "../components/Users/UsersClass";
 
 export type PostsType = {
     id: number
@@ -31,20 +32,26 @@ export type DialogsPageType = {
 export type SidebarType = {}
 
 export type GlobalUsersType = {
-    users:UsersType
+    users:UsersType,
+    pageSize:number,
+    totalUsersCount:number,
+    currentPage:number
 }
 export type UsersType = Array<UserType>
 export type UserType = {
-    id:number,
-    photoURL:string
-    followed:boolean,
-    fullName:string,
-    status:string,
-    location:UserLocationType
+    name: string,
+    id: number,
+    photos: {
+        small: null | string,
+        large: null |string
+    },
+    status: null | string,
+    followed: boolean
 }
-export type UserLocationType = {
-    city:string,country:string
-}
+
+// export type UserLocationType = {
+//     city:string,country:string
+// }
 
 export type RootStateType = {
     profilePage: ProfilePageType
