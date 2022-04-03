@@ -3,24 +3,28 @@ import {GlobalUsersType, UsersType} from "./State";
 export type UsersActionType = ChangeFollowACType |
     SetUsersACType |
     SetCurrentPageACType |
-    SetTotalUsersACType
+    SetTotalUsersACType |
+    ChangeFetchingACType
 
 export type ChangeFollowACType = ReturnType<typeof changeFollowAC>
 export type SetUsersACType = ReturnType<typeof setUsersAC>
 export type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 export type SetTotalUsersACType = ReturnType<typeof setTotalUsersAC>
+export type ChangeFetchingACType = ReturnType<typeof changeFetchingAC>
 
 export const changeFollow = "CHANGE-FOLLOW"
 export const setUsers = "SET-USERS"
 export const setCurrentPage = "SET-CURRENT-PAGE"
 export const setTotalUsers = "SET-TOTAL-USERS"
+export const changeFetching = "CHANGE-FETCHING"
 
 
 let initialUsersState = {
     users: [],
     pageSize:5,
     totalUsersCount:0,
-    currentPage:1
+    currentPage:1,
+    isFetching:false
 }
 
 export const UsersReducer = (state: GlobalUsersType = initialUsersState, action: UsersActionType) => {
@@ -37,8 +41,14 @@ export const UsersReducer = (state: GlobalUsersType = initialUsersState, action:
         case setCurrentPage: {
             return {...state,currentPage:action.payload.currentPage}
         }
-        case "SET-TOTAL-USERS": {
+        case setTotalUsers: {
             return {...state,totalUsersCount:action.payload.totalUsers}
+        }
+        case changeFetching: {
+            debugger
+            return {
+              ...state,isFetching:action.payload.isFetching
+            }
         }
         default:
             return state
@@ -80,4 +90,14 @@ export const setTotalUsersAC = (totalUsers:number) => {
         }
     } as const
 }
+
+export const changeFetchingAC = (isFetching:boolean) => {
+    return {
+        type:changeFetching,
+        payload: {
+            isFetching
+        }
+    } as const
+}
+
 
