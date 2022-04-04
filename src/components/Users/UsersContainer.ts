@@ -38,25 +38,7 @@ const mapStateToProps = (state: RootStateType):mapStateToPropsType => {
         isFetching:state.usersPage.isFetching
     }
 }
-// const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-//     return {
-//         changeFollow:(id:number) => {
-//             dispatch(changeFollowAC(id))
-//         },
-//         setUsers:(users:UsersType) => {
-//             dispatch(setUsersAC(users))
-//     },
-//         setCurrentPage:(currentPage:number) => {
-//             dispatch(setCurrentPageAC(currentPage))
-//         },
-//         setTotalUsers:(totalUsers:number ) => {
-//             dispatch(setTotalUsersAC(totalUsers))
-//         },
-//         changeFetching:(isFetching:boolean) => {
-//             dispatch(changeFetchingAC(isFetching))
-//         }
-//     }
-// }
+
 
 
 export default connect<mapStateToPropsType,mapDispatchToPropsType,
