@@ -2,11 +2,11 @@ import {connect} from "react-redux";
 import {RootStateType, UsersType} from "../../redux/State";
 import {Dispatch} from "redux";
 import {
-    changeFetchingAC,
-    changeFollowAC,
-    setCurrentPageAC,
-    setTotalUsersAC,
-    setUsersAC
+    changeFetching,
+    changeFollow,
+    setCurrentPage,
+    setTotalUsers,
+    setUsers
 } from "../../redux/UsersReducer";
 import usersClass from "./UsersClass";
 import {Users} from "./Users";
@@ -38,27 +38,34 @@ const mapStateToProps = (state: RootStateType):mapStateToPropsType => {
         isFetching:state.usersPage.isFetching
     }
 }
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-    return {
-        changeFollow:(id:number) => {
-            dispatch(changeFollowAC(id))
-        },
-        setUsers:(users:UsersType) => {
-            dispatch(setUsersAC(users))
-    },
-        setCurrentPage:(currentPage:number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsers:(totalUsers:number ) => {
-            dispatch(setTotalUsersAC(totalUsers))
-        },
-        changeFetching:(isFetching:boolean) => {
-            dispatch(changeFetchingAC(isFetching))
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+//     return {
+//         changeFollow:(id:number) => {
+//             dispatch(changeFollowAC(id))
+//         },
+//         setUsers:(users:UsersType) => {
+//             dispatch(setUsersAC(users))
+//     },
+//         setCurrentPage:(currentPage:number) => {
+//             dispatch(setCurrentPageAC(currentPage))
+//         },
+//         setTotalUsers:(totalUsers:number ) => {
+//             dispatch(setTotalUsersAC(totalUsers))
+//         },
+//         changeFetching:(isFetching:boolean) => {
+//             dispatch(changeFetchingAC(isFetching))
+//         }
+//     }
+// }
 
 
 export default connect<mapStateToPropsType,mapDispatchToPropsType,
     {},
-    RootStateType >(mapStateToProps, mapDispatchToProps)(usersClass)
+    RootStateType >(mapStateToProps, {
+    changeFollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsers,
+    changeFetching,
+
+})(usersClass)

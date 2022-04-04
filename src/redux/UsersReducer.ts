@@ -6,17 +6,13 @@ export type UsersActionType = ChangeFollowACType |
     SetTotalUsersACType |
     ChangeFetchingACType
 
-export type ChangeFollowACType = ReturnType<typeof changeFollowAC>
-export type SetUsersACType = ReturnType<typeof setUsersAC>
-export type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-export type SetTotalUsersACType = ReturnType<typeof setTotalUsersAC>
-export type ChangeFetchingACType = ReturnType<typeof changeFetchingAC>
+export type ChangeFollowACType = ReturnType<typeof changeFollow>
+export type SetUsersACType = ReturnType<typeof setUsers>
+export type SetCurrentPageACType = ReturnType<typeof setCurrentPage>
+export type SetTotalUsersACType = ReturnType<typeof setTotalUsers>
+export type ChangeFetchingACType = ReturnType<typeof changeFetching>
 
-export const changeFollow = "CHANGE-FOLLOW"
-export const setUsers = "SET-USERS"
-export const setCurrentPage = "SET-CURRENT-PAGE"
-export const setTotalUsers = "SET-TOTAL-USERS"
-export const changeFetching = "CHANGE-FETCHING"
+
 
 
 let initialUsersState = {
@@ -29,23 +25,22 @@ let initialUsersState = {
 
 export const UsersReducer = (state: GlobalUsersType = initialUsersState, action: UsersActionType) => {
     switch (action.type) {
-        case changeFollow : {
+        case "CHANGE-FOLLOW" : {
             return {
                 ...state,
                 users: state.users.map(m => m.id === action.payload.id ? {...m, followed: !m.followed} : m)
             }
         }
-        case setUsers: {
+        case "SET-USERS": {
             return {...state, users: action.payload.users}
         }
-        case setCurrentPage: {
+        case "SET-CURRENT-PAGE": {
             return {...state,currentPage:action.payload.currentPage}
         }
-        case setTotalUsers: {
+        case "SET-TOTAL-USERS": {
             return {...state,totalUsersCount:action.payload.totalUsers}
         }
-        case changeFetching: {
-            debugger
+        case "CHANGE-FETCHING": {
             return {
               ...state,isFetching:action.payload.isFetching
             }
@@ -55,45 +50,45 @@ export const UsersReducer = (state: GlobalUsersType = initialUsersState, action:
     }
 }
 
-export const changeFollowAC = (id: number) => {
+export const changeFollow = (id: number) => {
     return {
-        type: changeFollow,
+        type: "CHANGE-FOLLOW",
         payload: {
             id,
         }
     } as const
 }
 
-export const setUsersAC = (users: UsersType) => {
+export const setUsers = (users: UsersType) => {
     return {
-        type: setUsers,
+        type: "SET-USERS",
         payload: {
             users,
         }
     } as const
 }
 
-export const setCurrentPageAC = (currentPage:number) => {
+export const setCurrentPage = (currentPage:number) => {
     return {
-        type:setCurrentPage,
+        type:"SET-CURRENT-PAGE",
         payload: {
             currentPage
         }
     } as const
 }
 
-export const setTotalUsersAC = (totalUsers:number) => {
+export const setTotalUsers = (totalUsers:number) => {
     return {
-        type:setTotalUsers,
+        type:"SET-TOTAL-USERS",
         payload: {
             totalUsers
         }
     } as const
 }
 
-export const changeFetchingAC = (isFetching:boolean) => {
+export const changeFetching = (isFetching:boolean) => {
     return {
-        type:changeFetching,
+        type:"CHANGE-FETCHING",
         payload: {
             isFetching
         }
