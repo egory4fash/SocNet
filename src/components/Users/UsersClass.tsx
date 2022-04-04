@@ -4,6 +4,7 @@ import {mapDispatchToPropsType, mapStateToPropsType} from "./UsersContainer";
 import {UsersPresentation} from "./UsersPresentation";
 import s from './UsersClass.module.css'
 import loader from "./../../Assets/logo192.png"
+import { Preloader } from '../Preloader/Preloader';
 
 
 
@@ -44,7 +45,7 @@ class usersClassAPI extends React.Component<UsersPropsType> {
                 changeFollow = {this.props.changeFollow}
                 isFetching = {this.props.isFetching}
             /> :
-                <img src = {loader} alt = "loading" className = {s.loading}/>}
+                <Preloader />}
                 </>
         )
     }
