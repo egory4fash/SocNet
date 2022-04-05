@@ -1,23 +1,24 @@
 import React from "react";
 import s from "./UsersClass.module.css";
 import {UsersType} from "../../redux/State";
+import {NavLink} from "react-router-dom";
 
 
 type UsersPresentationPropsType = {
-    totalUsersCount:number,
-    pageSize:number,
-    onPageChanged :(pageNumber: number) => void ,
-    currentPage:number,
-    users:UsersType,
-    changeFollow : (id:number) => void,
-    isFetching:boolean
+    totalUsersCount: number,
+    pageSize: number,
+    onPageChanged: (pageNumber: number) => void,
+    currentPage: number,
+    users: UsersType,
+    changeFollow: (id: number) => void,
+    isFetching: boolean
 }
 
-export const UsersPresentation = (props:UsersPresentationPropsType) => {
+export const UsersPresentation = (props: UsersPresentationPropsType) => {
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = [];
-    for (let i = 1;i <= pagesCount;i++) {
+    for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
 
@@ -32,7 +33,9 @@ export const UsersPresentation = (props:UsersPresentationPropsType) => {
                 <div key={m.id}>
                         <span>
                             <div>
+                                <NavLink to={'/profile' + '/'+ m.id}>
                                 <img src={m.photos.small ? m.photos.small : ''}/>
+                                    </NavLink>
                             </div>
                             <div>
                                 {m.followed ?

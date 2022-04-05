@@ -19,5 +19,8 @@ export let reducersBatch = combineReducers({
 
 export let store: Store<ReduxStateType> = createStore(reducersBatch)
 
+//@ts-ignore
+window.store = store
+
 
 

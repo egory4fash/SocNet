@@ -9,6 +9,8 @@ import {DispatchActionType, RootStateType} from "./redux/State";
 import {Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from "./components/Profile/ProfileContainer";
+
 
 
 // type Poststype = {
@@ -59,7 +61,7 @@ function App() {
                                <DialogsContainer/>}/>
 
                     <Route path='/Profile'
-                           render={() => <Profile/>}/>
+                           render={() => <ProfileContainer/>}/>
 
                     <Route path='/Users'
                            render={() => <UsersContainer/>}/>

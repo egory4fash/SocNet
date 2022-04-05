@@ -2,7 +2,7 @@ import { ProfilePageActionType} from "./ProfileReducer";
 import { DialogActionType} from "./DialogsReducer";
 import {SidebarActionType} from "./SidebarReducer";
 import {UsersReducer} from "./UsersReducer";
-import usersClass from "../components/Users/UsersClass";
+
 
 export type PostsType = {
     id: number
@@ -21,7 +21,30 @@ export type DialogsType = {
 
 export type ProfilePageType = {
     postsData: Array<PostsType>
-    newPostText: string
+    newPostText: string,
+    profile:ProfileType
+}
+
+export type ProfileType = {
+    aboutMe: string,
+    contacts: {
+        facebook: string | null,
+        website: string | null,
+        vk: string | null,
+        twitter: string | null,
+        instagram: string | null,
+        youtube: string | null,
+        github: string | null,
+        mainLink: string | null
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string | null,
+    fullName: string | null,
+    userId: number,
+    photos: {
+        small: string | null,
+        large: string | null
+    }
 }
 
 export type DialogsPageType = {
