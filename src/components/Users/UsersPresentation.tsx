@@ -24,11 +24,7 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
 
     return (
         <div>
-            <div>
-                {pages.map(m => <span onClick={(e) => {
-                    props.onPageChanged(m)
-                }} className={props.currentPage === m ? s.selected : ''}>{m} </span>)}
-            </div>
+
             {props.users.map(m =>
                 <div key={m.id}>
                         <span>
@@ -56,6 +52,11 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
                     </span>
                 </div>)
             }
+            <div>
+                {pages.map(m => <span onClick={(e) => {
+                    props.onPageChanged(m)
+                }} className={props.currentPage === m ? s.selected : ''}>{m} </span>)}
+            </div>
         </div>
     )
 }
