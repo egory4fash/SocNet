@@ -3,6 +3,7 @@ import {ProfileReducer} from "./ProfileReducer";
 import {DialogsReducer} from "./DialogsReducer";
 import {SidebarReducer} from "./SidebarReducer";
 import {UsersReducer} from "./UsersReducer";
+import {AuthReducer} from "./AuthReducer";
 
 
 
@@ -15,6 +16,7 @@ export let reducersBatch = combineReducers({
     dialogsPage:DialogsReducer,
     sidebar:SidebarReducer,
     usersPage:UsersReducer,
+    auth:AuthReducer
 })
 
 export let store: Store<ReduxStateType> = createStore(reducersBatch)

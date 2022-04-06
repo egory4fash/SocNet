@@ -73,9 +73,16 @@ export type UserType = {
     followed: boolean
 }
 
-// export type UserLocationType = {
-//     city:string,country:string
-// }
+export type AuthGlobalDataType = {
+    resultCode: number
+    messages: string [],
+    data: AuthDataType
+}
+export type AuthDataType = {
+    id: number,
+    email: string |null,
+    login: string |null
+}
 
 export type RootStateType = {
     profilePage: ProfilePageType
