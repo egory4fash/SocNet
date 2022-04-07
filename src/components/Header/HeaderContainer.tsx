@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import {AuthDataType, AuthGlobalDataType, RootStateType} from "../../redux/State";
+import {AuthDataType, AuthGlobalDataType, } from "../../redux/State";
 import {connect} from "react-redux";
 import axios from "axios";
 import {setUserData} from "../../redux/AuthReducer";
@@ -18,23 +18,27 @@ export type mapDispatchToPropsType = {
 const mapStateToProps = (state: AuthGlobalDataType): mapStateToPropsType => {
     return {
         data:state.data
+
+
     }
 }
 
 class HeaderContainer extends React.Component<HeaderContainerProps> {
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',{withCredentials}).then(responce => {
+        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me',{withCredentials:true}).then(responce => {
             this.props.setUserData(responce.data)
+            debugger
     })
     }
 
     render() {
-        <Header/>
-    }
+        return (
+        <Header />
+        )}
 }
 
 
 export default connect<mapStateToPropsType, mapDispatchToPropsType,
     {},
-    RootStateType>(mapStateToProps, {setUserData})(HeaderContainer)
+    AuthGlobalDataType>(mapStateToProps, {setUserData})(HeaderContainer)
