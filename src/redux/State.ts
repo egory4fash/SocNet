@@ -75,20 +75,23 @@ export type UserType = {
 
 export type AuthGlobalDataType = {
     resultCode: number
-    messages: string [],
-    data: AuthDataType
+    messages?: string [],
+    data: AuthDataType,
+    isFetching:boolean
 }
 export type AuthDataType = {
     id: number,
-    email: string |null,
-    login: string |null
+    email: string ,
+    login: string
 }
+
 
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
     usersPage:GlobalUsersType
+    auth: AuthGlobalDataType
 
 }
 export type DispatchActionType =
