@@ -21,7 +21,6 @@ export const AuthReducer = (state: AuthGlobalDataType = initialAuthData, action:
         case "SET-USER-DATA": {
 
             let newState = {...state, data: action.payload.data}
-            debugger
             return newState
 
 

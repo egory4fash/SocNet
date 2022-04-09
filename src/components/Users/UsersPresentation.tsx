@@ -4,6 +4,7 @@ import {UsersType} from "../../redux/State";
 import {NavLink} from "react-router-dom";
 
 
+
 type UsersPresentationPropsType = {
     totalUsersCount: number,
     pageSize: number,
@@ -11,7 +12,8 @@ type UsersPresentationPropsType = {
     currentPage: number,
     users: UsersType,
     changeFollow: (id: number) => void,
-    isFetching: boolean
+    isFetching: boolean,
+    followChanger: (userId: number, followed: boolean) => void
 }
 
 export const UsersPresentation = (props: UsersPresentationPropsType) => {
@@ -22,6 +24,10 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
         pages.push(i)
     }
 
+    const followChangerHandler = (userId: number, followed: boolean) => {
+        props.followChanger(userId, followed)
+    }
+
     return (
         <div>
 
@@ -29,15 +35,18 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
                 <div key={m.id}>
                         <span>
                             <div>
-                                <NavLink to={'/profile' + '/'+ m.id}>
-                                <img src={m.photos.small ? m.photos.small : ''}/>
+                                <NavLink to={'/profile' + '/' + m.id}>
+                                <img
+                                    src={m.photos.small ? m.photos.small : 'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg'}
+                                    height={'100px'} width={'100px'}/>
                                     </NavLink>
                             </div>
                             <div>
-                                {m.followed ?
-                                    <button onClick={(e) => props.changeFollow(m.id)}>Follow</button>
-                                    : <button onClick={(e) => props.changeFollow(m.id)}>Unfollow</button>
-                                }
+                                    <button onClick={(e) => followChangerHandler(m.id, m.followed)}>
+                                        {m.followed ? 'Unfollow' : 'Follow'}
+                                    </button>
+
+
                             </div>
                         </span>
                     <span>
@@ -46,7 +55,7 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
                             <div>{m.status}</div>
                         </span>
                         <span>
-                            <div>{'m.location.city'}</div>
+                            <div>{m.followed ? 'Followed!!!' : "Nope"}</div>
                             <div>{'m.location.country'}</div>
                         </span>
                     </span>

@@ -37,14 +37,23 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching
+
     }
 }
 
 class usersClassAPI extends React.Component<UsersPagePropsType> {
 
     componentDidMount() {
+
+
+
         this.props.changeFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {withCredentials:true,
+                headers: {
+                    "API-KEY":'4c1f8e2e-911c-4c20-9e00-c61208faf7aa'
+                }
+            }).then(response => {
             this.props.changeFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsers(response.data.totalCount)
@@ -54,11 +63,48 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.changeFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+            {withCredentials:true,
+            headers: {
+                "API-KEY":'4c1f8e2e-911c-4c20-9e00-c61208faf7aa'
+            }}
+            ).then(response => {
             this.props.setUsers(response.data.items)
             this.props.changeFetching(false)
 
         })
+    }
+
+     followChanger = (userId: number, followed: boolean) => {
+        if (followed) {
+            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
+                {withCredentials:true,
+                    headers: {
+                        "API-KEY":'4c1f8e2e-911c-4c20-9e00-c61208faf7aa'
+                    }
+                }).then(response => {
+                if (response.data.resultCode === 0) {
+                    this.props.changeFollow(userId)
+
+                }
+            })
+
+        } else {
+            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
+                {},
+                {withCredentials: true,
+                    headers: {
+                        "API-KEY":'4c1f8e2e-911c-4c20-9e00-c61208faf7aa'
+                    }
+                }).then
+            (response => {
+                if (response.data.resultCode === 0) {
+                    this.props.changeFollow(userId)
+
+                }
+            })
+
+        }
     }
 
 
@@ -74,6 +120,7 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
                         users={this.props.users}
                         changeFollow={this.props.changeFollow}
                         isFetching={this.props.isFetching}
+                        followChanger = {this.followChanger}
                     /> :
                     <Preloader/>}
             </>

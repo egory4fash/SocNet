@@ -31,7 +31,6 @@ class HeaderContainer extends React.Component<HeaderContainerProps> {
         axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true}).then(responce => {
             this.props.setUserData(responce.data.data)
             this.props.changeAuthFetching(false)
-            debugger
         })
     }
 
