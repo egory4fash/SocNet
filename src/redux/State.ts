@@ -59,7 +59,8 @@ export type GlobalUsersType = {
     pageSize:number,
     totalUsersCount:number,
     currentPage:number,
-    isFetching:boolean
+    isFetching:boolean,
+    followingInProgress:boolean
 }
 export type UsersType = Array<UserType>
 export type UserType = {

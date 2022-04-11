@@ -4,7 +4,6 @@ import {UsersType} from "../../redux/State";
 import {NavLink} from "react-router-dom";
 
 
-
 type UsersPresentationPropsType = {
     totalUsersCount: number,
     pageSize: number,
@@ -13,7 +12,9 @@ type UsersPresentationPropsType = {
     users: UsersType,
     changeFollow: (id: number) => void,
     isFetching: boolean,
-    followChanger: (userId: number, followed: boolean) => void
+    followChanger: (userId: number, followed: boolean) => void,
+    followingInProgress: boolean,
+    followingInProgressHandler: (followingInProgress:boolean) => void
 }
 
 export const UsersPresentation = (props: UsersPresentationPropsType) => {
@@ -25,7 +26,12 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
     }
 
     const followChangerHandler = (userId: number, followed: boolean) => {
+
+
+
         props.followChanger(userId, followed)
+       // props.followingInProgressHandler(false)
+
     }
 
     return (
@@ -42,7 +48,8 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
                                     </NavLink>
                             </div>
                             <div>
-                                    <button onClick={(e) => followChangerHandler(m.id, m.followed)}>
+                                    <button onClick={(e) => followChangerHandler(m.id, m.followed)}
+                                    disabled={props.followingInProgress}>
                                         {m.followed ? 'Unfollow' : 'Follow'}
                                     </button>
 

@@ -4,13 +4,15 @@ export type UsersActionType = ChangeFollowACType |
     SetUsersACType |
     SetCurrentPageACType |
     SetTotalUsersACType |
-    ChangeFetchingACType
+    ChangeFetchingACType |
+    FollowingInProgressACType
 
 export type ChangeFollowACType = ReturnType<typeof changeFollow>
 export type SetUsersACType = ReturnType<typeof setUsers>
 export type SetCurrentPageACType = ReturnType<typeof setCurrentPage>
 export type SetTotalUsersACType = ReturnType<typeof setTotalUsers>
 export type ChangeFetchingACType = ReturnType<typeof changeFetching>
+export type FollowingInProgressACType = ReturnType<typeof followingInProgressHandler>
 
 
 
@@ -20,10 +22,11 @@ let initialUsersState = {
     pageSize:5,
     totalUsersCount:0,
     currentPage:1,
-    isFetching:false
+    isFetching:false,
+    followingInProgress:false
 }
 
-export const UsersReducer = (state: GlobalUsersType = initialUsersState, action: UsersActionType) => {
+export const UsersReducer = (state: GlobalUsersType = initialUsersState, action: UsersActionType): GlobalUsersType => {
     switch (action.type) {
         case "CHANGE-FOLLOW" : {
             return {
@@ -43,6 +46,12 @@ export const UsersReducer = (state: GlobalUsersType = initialUsersState, action:
         case "CHANGE-FETCHING": {
             return {
               ...state,isFetching:action.payload.isFetching
+            }
+        }
+        case "FOLLOWING-IN-PROGRESS": {
+
+            return {
+                ...state,followingInProgress:action.payload.followingInProgress
             }
         }
         default:
@@ -91,6 +100,15 @@ export const changeFetching = (isFetching:boolean) => {
         type:"CHANGE-FETCHING",
         payload: {
             isFetching
+        }
+    } as const
+}
+
+export const followingInProgressHandler = (followingInProgress:boolean) => {
+    return {
+        type:"FOLLOWING-IN-PROGRESS",
+        payload: {
+            followingInProgress
         }
     } as const
 }

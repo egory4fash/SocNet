@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {RootStateType, UsersType} from "../../redux/State";
 import {
     changeFetching,
-    changeFollow,
+    changeFollow, followingInProgressHandler,
     setCurrentPage,
     setTotalUsers,
     setUsers
@@ -20,7 +20,8 @@ export type mapStateToPropsType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress:boolean
 }
 export type mapDispatchToPropsType = {
     changeFollow: (id: number) => void,
@@ -28,6 +29,7 @@ export type mapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsers: (totalUsers: number) => void
     changeFetching: (isFetching: boolean) => void
+    followingInProgressHandler: (followingInProgress:boolean) => void
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
@@ -36,7 +38,8 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
 
     }
 }
@@ -68,19 +71,21 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
 
      followChanger = (userId: number, followed: boolean) => {
         if (followed) {
+            this.props.followingInProgressHandler(true)
             API.unfollow(userId).then(data => {
                 if (data.resultCode === 0) {
                     this.props.changeFollow(userId)
                 }
-            })
+            }).finally(() => this.props.followingInProgressHandler(false))
 
         } else {
+            this.props.followingInProgressHandler(true)
             API.follow(userId).then
             (data => {
                 if (data.resultCode === 0) {
                     this.props.changeFollow(userId)
                 }
-            })
+            }).finally(() => this.props.followingInProgressHandler(false))
         }
     }
 
@@ -98,6 +103,8 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
                         changeFollow={this.props.changeFollow}
                         isFetching={this.props.isFetching}
                         followChanger = {this.followChanger}
+                        followingInProgress = {this.props.followingInProgress}
+                        followingInProgressHandler = {this.props.followingInProgressHandler}
                     /> :
                     <Preloader/>}
             </>
@@ -113,4 +120,5 @@ export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootStat
     setCurrentPage,
     setTotalUsers,
     changeFetching,
+    followingInProgressHandler
 })(usersClassAPI)
