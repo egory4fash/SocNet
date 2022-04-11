@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "./Header";
-import {AuthDataType, AuthGlobalDataType, RootStateType,} from "../../redux/State";
+import {AuthDataType, RootStateType,} from "../../redux/State";
 import {connect} from "react-redux";
-import axios from "axios";
 import {changeAuthFetching, setUserData} from "../../redux/AuthReducer";
 import {Preloader} from "../Preloader/Preloader";
+import {API} from "../../API/API";
 
 
 export type HeaderContainerProps = mapStateToPropsType & mapDispatchToPropsType
@@ -28,8 +28,8 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
 class HeaderContainer extends React.Component<HeaderContainerProps> {
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true}).then(responce => {
-            this.props.setUserData(responce.data.data)
+        API.auth().then(data => {
+            this.props.setUserData(data.data)
             this.props.changeAuthFetching(false)
         })
     }

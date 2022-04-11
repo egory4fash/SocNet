@@ -1,7 +1,7 @@
 import { ProfilePageActionType} from "./ProfileReducer";
 import { DialogActionType} from "./DialogsReducer";
 import {SidebarActionType} from "./SidebarReducer";
-import {UsersReducer} from "./UsersReducer";
+
 
 
 export type PostsType = {
