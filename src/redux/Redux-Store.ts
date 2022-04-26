@@ -1,9 +1,11 @@
-import {combineReducers, createStore, Store} from "redux";
+import {applyMiddleware, combineReducers, createStore, Store} from "redux";
 import {ProfileReducer} from "./ProfileReducer";
 import {DialogsReducer} from "./DialogsReducer";
 import {SidebarReducer} from "./SidebarReducer";
 import {UsersReducer} from "./UsersReducer";
 import {AuthReducer} from "./AuthReducer";
+import thunk from "redux-thunk";
+
 
 
 
@@ -19,7 +21,7 @@ export let reducersBatch = combineReducers({
     auth:AuthReducer
 })
 
-export let store: Store<ReduxStateType> = createStore(reducersBatch)
+export let store: Store<ReduxStateType> = createStore(reducersBatch,applyMiddleware(thunk))
 
 //@ts-ignore
 window.store = store

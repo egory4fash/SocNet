@@ -1,4 +1,6 @@
 import {GlobalUsersType, UsersType} from "./State";
+import {API} from "../API/API";
+import {Dispatch} from "redux";
 
 export type UsersActionType = ChangeFollowACType |
     SetUsersACType |
@@ -15,15 +17,13 @@ export type ChangeFetchingACType = ReturnType<typeof changeFetching>
 export type FollowingInProgressACType = ReturnType<typeof followingInProgressHandler>
 
 
-
-
 let initialUsersState = {
     users: [],
-    pageSize:5,
-    totalUsersCount:0,
-    currentPage:1,
-    isFetching:false,
-    followingInProgress:false
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false,
+    followingInProgress: false
 }
 
 export const UsersReducer = (state: GlobalUsersType = initialUsersState, action: UsersActionType): GlobalUsersType => {
@@ -38,20 +38,20 @@ export const UsersReducer = (state: GlobalUsersType = initialUsersState, action:
             return {...state, users: action.payload.users}
         }
         case "SET-CURRENT-PAGE": {
-            return {...state,currentPage:action.payload.currentPage}
+            return {...state, currentPage: action.payload.currentPage}
         }
         case "SET-TOTAL-USERS": {
-            return {...state,totalUsersCount:action.payload.totalUsers}
+            return {...state, totalUsersCount: action.payload.totalUsers}
         }
         case "CHANGE-FETCHING": {
             return {
-              ...state,isFetching:action.payload.isFetching
+                ...state, isFetching: action.payload.isFetching
             }
         }
         case "FOLLOWING-IN-PROGRESS": {
 
             return {
-                ...state,followingInProgress:action.payload.followingInProgress
+                ...state, followingInProgress: action.payload.followingInProgress
             }
         }
         default:
@@ -77,40 +77,60 @@ export const setUsers = (users: UsersType) => {
     } as const
 }
 
-export const setCurrentPage = (currentPage:number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
-        type:"SET-CURRENT-PAGE",
+        type: "SET-CURRENT-PAGE",
         payload: {
             currentPage
         }
     } as const
 }
 
-export const setTotalUsers = (totalUsers:number) => {
+export const setTotalUsers = (totalUsers: number) => {
     return {
-        type:"SET-TOTAL-USERS",
+        type: "SET-TOTAL-USERS",
         payload: {
             totalUsers
         }
     } as const
 }
 
-export const changeFetching = (isFetching:boolean) => {
+export const changeFetching = (isFetching: boolean) => {
     return {
-        type:"CHANGE-FETCHING",
+        type: "CHANGE-FETCHING",
         payload: {
             isFetching
         }
     } as const
 }
 
-export const followingInProgressHandler = (followingInProgress:boolean) => {
+export const followingInProgressHandler = (followingInProgress: boolean) => {
     return {
-        type:"FOLLOWING-IN-PROGRESS",
+        type: "FOLLOWING-IN-PROGRESS",
         payload: {
             followingInProgress
         }
     } as const
 }
 
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(changeFetching(true))
+        API.getUsers(currentPage, pageSize).then(data => {
+            dispatch(changeFetching(false))
+            dispatch(setUsers(data.items))
+            dispatch(setTotalUsers(data.totalCount))
+        })
+    }
+}
 
+export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setCurrentPage(pageNumber))
+        dispatch(changeFetching(true))
+        API.getUsers(pageNumber, pageSize).then(data => {
+            dispatch(setUsers(data.items))
+            dispatch(changeFetching(false))
+        })
+    }
+}

@@ -1,12 +1,9 @@
 import {connect} from "react-redux";
 import {RootStateType, UsersType} from "../../redux/State";
-import {
-    changeFetching,
-    changeFollow, followingInProgressHandler,
-    setCurrentPage,
-    setTotalUsers,
-    setUsers
-} from "../../redux/UsersReducer";
+import {changeFollow,
+    followingInProgressHandler,
+    getUsersThunkCreator,
+    onPageChangeThunkCreator,} from "../../redux/UsersReducer";
 import React from "react";
 import {UsersPresentation} from "./UsersPresentation";
 import {Preloader} from "../Preloader/Preloader";
@@ -25,11 +22,9 @@ export type mapStateToPropsType = {
 }
 export type mapDispatchToPropsType = {
     changeFollow: (id: number) => void,
-    setUsers: (users: UsersType) => void
-    setCurrentPage: (currentPage: number) => void
-    setTotalUsers: (totalUsers: number) => void
-    changeFetching: (isFetching: boolean) => void
-    followingInProgressHandler: (followingInProgress:boolean) => void
+    followingInProgressHandler: (followingInProgress:boolean) => void,
+    getUsersThunkCreator:(currentPage:number,pageSize:number) => void,
+    onPageChangeThunkCreator:(currentPage:number,pageSize:number) => void
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
@@ -47,26 +42,11 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
 class usersClassAPI extends React.Component<UsersPagePropsType> {
 
     componentDidMount() {
-
-
-
-        this.props.changeFetching(true)
-
-        API.getUsers(this.props.currentPage,this.props.pageSize).then(data => {
-            this.props.changeFetching(false)
-            this.props.setUsers(data.items)
-            this.props.setTotalUsers(data.totalCount)
-        })
+       this.props.getUsersThunkCreator(this.props.currentPage,this.props.pageSize)
     }
 
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.changeFetching(true)
-        API.getUsers(pageNumber,this.props.pageSize).then(data => {
-            this.props.setUsers(data.items)
-            this.props.changeFetching(false)
-
-        })
+    onPageChanged = (pageNumber: number,) => {
+        this.props.onPageChangeThunkCreator(pageNumber,this.props.pageSize)
     }
 
      followChanger = (userId: number, followed: boolean) => {
@@ -116,9 +96,7 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootStateType>
 (mapStateToProps, {
     changeFollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsers,
-    changeFetching,
-    followingInProgressHandler
+    followingInProgressHandler,
+    getUsersThunkCreator,
+    onPageChangeThunkCreator
 })(usersClassAPI)

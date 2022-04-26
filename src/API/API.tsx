@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ProfileType} from "../redux/State";
 
 
 const instance = axios.create({
@@ -34,8 +35,8 @@ export const API = {
         })
     },
 
-    getProfile (userId:string) {
-        return instance.get(`profile/${userId}`).then(responce => {
+    getProfile (userId:number) {
+        return instance.get<ProfileType>(`profile/${userId}`).then(responce => {
             return responce.data
             debugger
         })

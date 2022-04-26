@@ -36,7 +36,7 @@ let initialProfileState = {
 
 }
 
-export const ProfileReducer = (state: ProfilePageType = initialProfileState, action: ProfilePageActionType) => {
+export const ProfileReducer = (state: ProfilePageType = initialProfileState, action: ProfilePageActionType):ProfilePageType => {
     switch (action.type) {
         case "UPDATE-MESSAGE": {
             let newState = {...state}
