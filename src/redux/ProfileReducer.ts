@@ -1,4 +1,4 @@
-import {PostsType, ProfilePageType,} from "./State";
+import {PostsType, ProfilePageType, ProfileType,} from "./State";
 
 
 export type ProfilePageActionType = updateMessageACType | addPostACType | setUserProfile
@@ -77,7 +77,7 @@ export const addPost = () => {
         type: "ADD-POST",
     } as const
 }
-export const setUserProfile = (profile:ProfilePageType) => {
+export const setUserProfile = (profile:ProfileType) => {
     return {
         type:"SET-USER-PROFILE",
         payload: {

@@ -1,7 +1,7 @@
 import React from 'react'
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {ProfilePageType, ProfileType, RootStateType} from "../../redux/State";
+import { ProfileType, RootStateType} from "../../redux/State";
 import {setUserProfile} from "../../redux/ProfileReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {API} from "../../API/API";
@@ -13,7 +13,7 @@ export type mapStateToPropsType = {
     profile: ProfileType
 }
 export type mapDispatchToPropsType = {
-    setUserProfile: (profile: ProfilePageType) => void
+    setUserProfile: (profile: ProfileType) => void
 }
 
 export type ParamType = {

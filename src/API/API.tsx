@@ -37,6 +37,7 @@ export const API = {
     getProfile (userId:string) {
         return instance.get(`profile/${userId}`).then(responce => {
             return responce.data
+            debugger
         })
     }
 
