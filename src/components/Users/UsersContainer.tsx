@@ -1,13 +1,15 @@
 import {connect} from "react-redux";
 import {RootStateType, UsersType} from "../../redux/State";
-import {changeFollow,
-    followingInProgressHandler,
+import {
+    changeFollow,
+    followingInProgressHandler, followThunkCreator,
     getUsersThunkCreator,
-    onPageChangeThunkCreator,} from "../../redux/UsersReducer";
+    onPageChangeThunkCreator, unFollowThunkCreator,
+} from "../../redux/UsersReducer";
 import React from "react";
 import {UsersPresentation} from "./UsersPresentation";
 import {Preloader} from "../Preloader/Preloader";
-import {API} from "../../API/API";
+
 
 
 export type UsersPagePropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -18,13 +20,15 @@ export type mapStateToPropsType = {
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean,
-    followingInProgress:boolean
+    followingInProgress: boolean
 }
 export type mapDispatchToPropsType = {
     changeFollow: (id: number) => void,
-    followingInProgressHandler: (followingInProgress:boolean) => void,
-    getUsersThunkCreator:(currentPage:number,pageSize:number) => void,
-    onPageChangeThunkCreator:(currentPage:number,pageSize:number) => void
+    followingInProgressHandler: (followingInProgress: boolean) => void,
+    getUsersThunkCreator: (currentPage: number, pageSize: number) => void,
+    onPageChangeThunkCreator: (currentPage: number, pageSize: number) => void,
+    unFollowThunkCreator: (userId: number, followed: boolean) => void,
+    followThunkCreator: (userId: number, followed: boolean) => void
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
@@ -34,7 +38,8 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+
 
     }
 }
@@ -42,31 +47,15 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
 class usersClassAPI extends React.Component<UsersPagePropsType> {
 
     componentDidMount() {
-       this.props.getUsersThunkCreator(this.props.currentPage,this.props.pageSize)
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number,) => {
-        this.props.onPageChangeThunkCreator(pageNumber,this.props.pageSize)
+        this.props.onPageChangeThunkCreator(pageNumber, this.props.pageSize)
     }
 
-     followChanger = (userId: number, followed: boolean) => {
-        if (followed) {
-            this.props.followingInProgressHandler(true)
-            API.unfollow(userId).then(data => {
-                if (data.resultCode === 0) {
-                    this.props.changeFollow(userId)
-                }
-            }).finally(() => this.props.followingInProgressHandler(false))
-
-        } else {
-            this.props.followingInProgressHandler(true)
-            API.follow(userId).then
-            (data => {
-                if (data.resultCode === 0) {
-                    this.props.changeFollow(userId)
-                }
-            }).finally(() => this.props.followingInProgressHandler(false))
-        }
+    followChanger = (userId: number, followed: boolean) => {
+        followed ? this.props.unFollowThunkCreator(userId,followed) : this.props.followThunkCreator(userId, followed)
     }
 
 
@@ -82,9 +71,9 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
                         users={this.props.users}
                         changeFollow={this.props.changeFollow}
                         isFetching={this.props.isFetching}
-                        followChanger = {this.followChanger}
-                        followingInProgress = {this.props.followingInProgress}
-                        followingInProgressHandler = {this.props.followingInProgressHandler}
+                        followChanger={this.followChanger}
+                        followingInProgress={this.props.followingInProgress}
+                        followingInProgressHandler={this.props.followingInProgressHandler}
                     /> :
                     <Preloader/>}
             </>
@@ -98,5 +87,7 @@ export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootStat
     changeFollow,
     followingInProgressHandler,
     getUsersThunkCreator,
-    onPageChangeThunkCreator
+    onPageChangeThunkCreator,
+    unFollowThunkCreator,
+    followThunkCreator
 })(usersClassAPI)

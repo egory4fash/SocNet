@@ -1,4 +1,6 @@
 import {PostsType, ProfilePageType, ProfileType,} from "./State";
+import {Dispatch} from "redux";
+import {API} from "../API/API";
 
 
 export type ProfilePageActionType = updateMessageACType | addPostACType | setUserProfile
@@ -14,16 +16,17 @@ let initialProfileState = {
         {id: 3, message: "need 3rd?", likesCount: 45}
     ],
     newPostText: '',
-    profile:{aboutMe: '',
+    profile: {
+        aboutMe: '',
         contacts: {
             facebook: null,
             website: null,
-            vk:  null,
+            vk: null,
             twitter: null,
-            instagram:  null,
-            youtube:  null,
-            github:  null,
-            mainLink:  null
+            instagram: null,
+            youtube: null,
+            github: null,
+            mainLink: null
         },
         lookingForAJob: false,
         lookingForAJobDescription: null,
@@ -31,12 +34,13 @@ let initialProfileState = {
         userId: 1,
         photos: {
             small: null,
-            large:  null
-        }}
+            large: null
+        }
+    }
 
 }
 
-export const ProfileReducer = (state: ProfilePageType = initialProfileState, action: ProfilePageActionType):ProfilePageType => {
+export const ProfileReducer = (state: ProfilePageType = initialProfileState, action: ProfilePageActionType): ProfilePageType => {
     switch (action.type) {
         case "UPDATE-MESSAGE": {
             let newState = {...state}
@@ -55,7 +59,7 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
             return newState
         }
         case "SET-USER-PROFILE": {
-            return {...state,profile:action.payload.profile}
+            return {...state, profile: action.payload.profile}
         }
         default:
             return state
@@ -77,13 +81,21 @@ export const addPost = () => {
         type: "ADD-POST",
     } as const
 }
-export const setUserProfile = (profile:ProfileType) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {
-        type:"SET-USER-PROFILE",
+        type: "SET-USER-PROFILE",
         payload: {
             profile
         }
     } as const
+}
+
+export const getProfileThunkCreator = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        API.getProfile(Number(userId)).then(data => {
+            dispatch(setUserProfile(data))
+        })
+    }
 }
 
 

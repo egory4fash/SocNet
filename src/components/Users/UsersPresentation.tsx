@@ -14,7 +14,7 @@ type UsersPresentationPropsType = {
     isFetching: boolean,
     followChanger: (userId: number, followed: boolean) => void,
     followingInProgress: boolean,
-    followingInProgressHandler: (followingInProgress:boolean) => void
+    followingInProgressHandler: (followingInProgress: boolean) => void
 }
 
 export const UsersPresentation = (props: UsersPresentationPropsType) => {
@@ -26,12 +26,8 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
     }
 
     const followChangerHandler = (userId: number, followed: boolean) => {
-
-
-
+        debugger
         props.followChanger(userId, followed)
-       // props.followingInProgressHandler(false)
-
     }
 
     return (
@@ -49,7 +45,7 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
                             </div>
                             <div>
                                     <button onClick={(e) => followChangerHandler(m.id, m.followed)}
-                                    disabled={props.followingInProgress}>
+                                            disabled={props.followingInProgress}>
                                         {m.followed ? 'Unfollow' : 'Follow'}
                                     </button>
 

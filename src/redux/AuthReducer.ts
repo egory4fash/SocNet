@@ -1,4 +1,6 @@
 import {AuthDataType, AuthGlobalDataType} from "./State";
+import {Dispatch} from "redux";
+import {API} from "../API/API";
 
 export type AuthActionType = SetUserDataType | ChangeAuthFetchingACType
 
@@ -52,4 +54,13 @@ export const changeAuthFetching = (isFetching: boolean) => {
             isFetching
         }
     } as const
+}
+
+export const authDataThunkCreator = () => {
+    return (dispatch:Dispatch) => {
+        API.auth().then(data => {
+            dispatch(setUserData(data.data))
+            dispatch(changeAuthFetching(false))
+        })
+    }
 }

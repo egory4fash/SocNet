@@ -134,3 +134,24 @@ export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number) =
         })
     }
 }
+export const unFollowThunkCreator = (userId: number, followed: boolean) => {
+    return (dispatch: Dispatch) => {
+        dispatch(followingInProgressHandler(true))
+        API.unfollow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(changeFollow(userId))
+            }
+        }).finally(() => dispatch(followingInProgressHandler(false)))
+    }
+}
+export const followThunkCreator = (userId: number, followed: boolean) => {
+    return (dispatch: Dispatch) => {
+        dispatch(followingInProgressHandler(true))
+        API.follow(userId).then
+        (data => {
+            if (data.resultCode === 0) {
+                dispatch(changeFollow(userId))
+            }
+        }).finally(() => dispatch(followingInProgressHandler(false)))
+    }
+}
