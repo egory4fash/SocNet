@@ -26,7 +26,6 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
     }
 
     const followChangerHandler = (userId: number, followed: boolean) => {
-        debugger
         props.followChanger(userId, followed)
     }
 

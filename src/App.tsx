@@ -56,10 +56,12 @@ function App() {
                            render={() =>
                                <DialogsContainer/>}/>
 
-                    <Route path='/Profile/:userId'
+                    <Route path='/Profile/:userId?'
                            render={() => <ProfileContainer/>}/>
 
                     <Route path='/Users'
+                           render={() => <UsersContainer/>}/>
+                    <Route path='/Login'
                            render={() => <UsersContainer/>}/>
                 </div>
             </div>

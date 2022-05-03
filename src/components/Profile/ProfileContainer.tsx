@@ -22,7 +22,7 @@ export type PropsType = RouteComponentProps<ParamType> & ProfilePagePropsType
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
     }
 }
 
@@ -31,14 +31,14 @@ class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
 
         let userId = this.props.match.params.userId
-
         if (!userId) userId = '1'
         this.props.getProfileThunkCreator(userId)
     }
 
     render() {
         return (
-            <Profile {...this.props}
+
+            <Profile
                      profile={this.props.profile}/>
         )
     }

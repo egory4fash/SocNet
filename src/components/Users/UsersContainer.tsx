@@ -47,7 +47,9 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
 class usersClassAPI extends React.Component<UsersPagePropsType> {
 
     componentDidMount() {
+
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
+
     }
 
     onPageChanged = (pageNumber: number,) => {
@@ -60,6 +62,7 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
 
 
     render() {
+
         return (
             <>
                 {!this.props.isFetching ?

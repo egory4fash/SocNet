@@ -9,7 +9,7 @@ type updateMessageACType = ReturnType<typeof updateMessage>
 type addPostACType = ReturnType<typeof addPost>
 type setUserProfile = ReturnType<typeof setUserProfile>
 
-let initialProfileState = {
+export let initialProfileState = {
     postsData: [
         {id: 1, message: "1st post", likesCount: 12},
         {id: 2, message: "2nd post bro", likesCount: 23},
@@ -30,8 +30,8 @@ let initialProfileState = {
         },
         lookingForAJob: false,
         lookingForAJobDescription: null,
-        fullName: null,
-        userId: 1,
+        fullName: 'Egory4',
+        userId: 0,
         photos: {
             small: null,
             large: null
@@ -91,10 +91,15 @@ export const setUserProfile = (profile: ProfileType) => {
 }
 
 export const getProfileThunkCreator = (userId: string) => {
+    if (userId !== '0') {
     return (dispatch: Dispatch) => {
         API.getProfile(Number(userId)).then(data => {
             dispatch(setUserProfile(data))
         })
+    }} else {
+        return  (dispatch:Dispatch) => {
+            dispatch(setUserProfile(initialProfileState.profile))
+        }
     }
 }
 
