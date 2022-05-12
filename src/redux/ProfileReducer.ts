@@ -1,4 +1,6 @@
 import {PostsType, ProfilePageType, ProfileType,} from "./State";
+import {Dispatch} from "redux";
+import {API} from "../API/API";
 
 
 export type ProfilePageActionType = updateMessageACType | addPostACType | setUserProfile
@@ -86,4 +88,12 @@ export const setUserProfile = (profile:ProfileType) => {
     } as const
 }
 
+export const getUserProfileThunkCreator = (userId:string) => {
+    return (dispatch:Dispatch) => {
+        API.getProfile(Number(userId)).then(data => {
+            dispatch(setUserProfile(data))
+        })
+    }
+
+}
 

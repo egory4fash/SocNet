@@ -38,7 +38,6 @@ export const API = {
     getProfile (userId:number) {
         return instance.get<ProfileType>(`profile/${userId}`).then(responce => {
             return responce.data
-            debugger
         })
     }
 

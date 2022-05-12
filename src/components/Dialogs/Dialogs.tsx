@@ -25,7 +25,7 @@ const Dialogs = (props: DialogsPropsType) => {
         props.addMessage(newMessage)
     }
 
-
+alert(props.isAuth)
     return (
 
 

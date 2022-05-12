@@ -78,7 +78,8 @@ export type AuthGlobalDataType = {
     resultCode: number
     messages?: string [],
     data: AuthDataType,
-    isFetching:boolean
+    isFetching:boolean,
+    isLogined:boolean
 }
 export type AuthDataType = {
     id: number,

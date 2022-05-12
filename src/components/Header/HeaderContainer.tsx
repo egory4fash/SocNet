@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import {AuthDataType, RootStateType,} from "../../redux/State";
 import {connect} from "react-redux";
-import {changeAuthFetching, setUserData} from "../../redux/AuthReducer";
+import {changeAuthFetching, getAuthUserDataThunkCreator, setUserData} from "../../redux/AuthReducer";
 import {Preloader} from "../Preloader/Preloader";
 import {API} from "../../API/API";
 
@@ -14,8 +14,7 @@ export type mapStateToPropsType = {
     isFetching: boolean
 }
 export type mapDispatchToPropsType = {
-    setUserData: (data: AuthDataType) => void
-    changeAuthFetching: (isFetching: boolean) => void
+    getAuthUserDataThunkCreator:() => void
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
@@ -28,10 +27,7 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
 class HeaderContainer extends React.Component<HeaderContainerProps> {
 
     componentDidMount() {
-        API.auth().then(data => {
-            this.props.setUserData(data.data)
-            this.props.changeAuthFetching(false)
-        })
+        this.props.getAuthUserDataThunkCreator()
     }
 
     render() {
@@ -52,6 +48,5 @@ class HeaderContainer extends React.Component<HeaderContainerProps> {
 export default connect<mapStateToPropsType, mapDispatchToPropsType,
     {},
     RootStateType>(mapStateToProps, {
-    setUserData,
-    changeAuthFetching
+    getAuthUserDataThunkCreator
 })(HeaderContainer)
