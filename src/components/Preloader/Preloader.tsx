@@ -1,5 +1,5 @@
 import React from "react";
-import loader from "../../Assets/logo192.png";
+import loader from "../../Assets/Loading_icon.gif";
 import s from "../Users/UsersClass.module.css";
 
 export const Preloader = () => {

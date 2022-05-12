@@ -1,7 +1,7 @@
 import {GlobalUsersType, UsersType} from "./State";
 import {API} from "../API/API";
 import {Dispatch} from "redux";
-import {initialProfileState} from "./ProfileReducer";
+
 
 export type UsersActionType = ChangeFollowACType |
     SetUsersACType |
@@ -36,7 +36,6 @@ export const UsersReducer = (state: GlobalUsersType = initialUsersState, action:
             }
         }
         case "SET-USERS": {
-            console.log({...state, users: action.payload.users,...initialProfileState.profile})
             return {...state, users: action.payload.users}
 
         }

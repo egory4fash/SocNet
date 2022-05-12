@@ -34,11 +34,11 @@ class HeaderContainer extends React.Component<HeaderContainerProps> {
 
         return (
             <>
-                {!this.props.isFetching ?
+
                     <Header email={this.props.data?.email || 'padla'}
                             login={this.props.data?.login || 'rabotai'}/>
-                    : <Preloader/>
-                }
+
+
             </>
         )
     }

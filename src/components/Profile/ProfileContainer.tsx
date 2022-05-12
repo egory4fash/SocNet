@@ -3,14 +3,15 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {ProfileType, RootStateType} from "../../redux/State";
 import {getUserProfileThunkCreator} from "../../redux/ProfileReducer";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 
 
 
 export type ProfilePagePropsType = mapStateToPropsType & mapDispatchToPropsType
 
 export type mapStateToPropsType = {
-    profile: ProfileType
+    profile: ProfileType,
+    isLogined:boolean
 }
 export type mapDispatchToPropsType = {
     getUserProfileThunkCreator:(userId:string) => void
@@ -23,7 +24,8 @@ export type PropsType = RouteComponentProps<ParamType> & ProfilePagePropsType
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isLogined: state.auth.isLogined
     }
 }
 
@@ -38,6 +40,9 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
+
+        if (!this.props.isLogined) return <Redirect to='/login' />
+
         return (
             <Profile {...this.props}
                      profile={this.props.profile}/>

@@ -3,14 +3,17 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../redux/State";
 
+
 export type ProfilePropsType = {
-    profile:ProfileType
+    profile:ProfileType,
+
 }
 
 
 
 function Profile(props:ProfilePropsType) {
-    console.log(props)
+
+
     return (
         <div>
             <ProfileInfo profile = {props.profile}/>
