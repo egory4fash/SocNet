@@ -26,6 +26,7 @@ const Dialogs = (props: DialogsPropsType) => {
     }
 
 alert(props.isAuth)
+
     return (
 
 
