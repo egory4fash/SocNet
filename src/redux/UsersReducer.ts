@@ -1,6 +1,7 @@
 import {GlobalUsersType, UsersType} from "./State";
 import {API} from "../API/API";
 import {Dispatch} from "redux";
+import {initialProfileState} from "./ProfileReducer";
 
 export type UsersActionType = ChangeFollowACType |
     SetUsersACType |
@@ -35,7 +36,9 @@ export const UsersReducer = (state: GlobalUsersType = initialUsersState, action:
             }
         }
         case "SET-USERS": {
+            console.log({...state, users: action.payload.users,...initialProfileState.profile})
             return {...state, users: action.payload.users}
+
         }
         case "SET-CURRENT-PAGE": {
             return {...state, currentPage: action.payload.currentPage}
@@ -132,5 +135,26 @@ export const onPageChangeThunkCreator = (pageNumber: number, pageSize: number) =
             dispatch(setUsers(data.items))
             dispatch(changeFetching(false))
         })
+    }
+}
+export const unFollowThunkCreator = (userId: number, followed: boolean) => {
+    return (dispatch: Dispatch) => {
+        dispatch(followingInProgressHandler(true))
+        API.unfollow(userId).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(changeFollow(userId))
+            }
+        }).finally(() => dispatch(followingInProgressHandler(false)))
+    }
+}
+export const followThunkCreator = (userId: number, followed: boolean) => {
+    return (dispatch: Dispatch) => {
+        dispatch(followingInProgressHandler(true))
+        API.follow(userId).then
+        (data => {
+            if (data.resultCode === 0) {
+                dispatch(changeFollow(userId))
+            }
+        }).finally(() => dispatch(followingInProgressHandler(false)))
     }
 }
