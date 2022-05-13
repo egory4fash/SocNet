@@ -22,11 +22,10 @@ const Dialogs = (props: DialogsPropsType) => {
     const addMessage = () => {
 
         const newMessage = NewMessageElement.current ? NewMessageElement.current.value : ""
-        console.log(newMessage)
         props.addMessage(newMessage)
     }
 
-if (!props.isAuth ) return <Redirect to={'/login'} />
+// if (!props.isAuth ) return <Redirect to={'/login'} />
 
     return (
 

@@ -9,6 +9,7 @@ import {
 import React from "react";
 import {UsersPresentation} from "./UsersPresentation";
 import {Preloader} from "../Preloader/Preloader";
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 
@@ -84,6 +85,7 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
     }
 }
 
+const redirectUsersClass = WithAuthRedirect(usersClassAPI)
 
 export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootStateType>
 (mapStateToProps, {
@@ -93,4 +95,4 @@ export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootStat
     onPageChangeThunkCreator,
     unFollowThunkCreator,
     followThunkCreator
-})(usersClassAPI)
+})(redirectUsersClass)
