@@ -22,7 +22,7 @@ function App() {
                     <Route path='/Dialogs'
                            render={() => <DialogsContainer/>}/>
 
-                    <Route path='/Profile/:userId'
+                    <Route path='/Profile/:userId?'
                            render={() => <ProfileContainer/>}/>
 
                     <Route path='/Users'

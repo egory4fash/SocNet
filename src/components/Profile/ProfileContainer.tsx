@@ -33,9 +33,7 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
 class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-
         let userId = this.props.match.params.userId
-
         if (!userId) userId = '1'
         this.props.getUserProfileThunkCreator(userId)
     }
