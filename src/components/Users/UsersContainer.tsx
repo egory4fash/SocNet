@@ -10,6 +10,7 @@ import React from "react";
 import {UsersPresentation} from "./UsersPresentation";
 import {Preloader} from "../Preloader/Preloader";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 
@@ -85,14 +86,18 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
     }
 }
 
-const redirectUsersClass = WithAuthRedirect(usersClassAPI)
 
-export default connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootStateType>
-(mapStateToProps, {
-    changeFollow,
-    followingInProgressHandler,
-    getUsersThunkCreator,
-    onPageChangeThunkCreator,
-    unFollowThunkCreator,
-    followThunkCreator
-})(redirectUsersClass)
+
+
+export default compose<React.ComponentType> (
+    connect<mapStateToPropsType, mapDispatchToPropsType, {}, RootStateType>
+    (mapStateToProps, {
+        changeFollow,
+        followingInProgressHandler,
+        getUsersThunkCreator,
+        onPageChangeThunkCreator,
+        unFollowThunkCreator,
+        followThunkCreator
+    }),
+    WithAuthRedirect
+) (usersClassAPI)
