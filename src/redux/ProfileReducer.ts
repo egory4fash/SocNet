@@ -1,13 +1,18 @@
 import {PostsType, ProfilePageType, ProfileType,} from "./State";
 import {Dispatch} from "redux";
-import {API} from "../API/API";
+import {API, profileAPI} from "../API/API";
+import profile from "../components/Profile/Profile";
 
 
-export type ProfilePageActionType = updateMessageACType | addPostACType | setUserProfile
+export type ProfilePageActionType = updateMessageACType |
+    addPostACType |
+    setUserProfileACType |
+    setProfileStatusACType
 
 type updateMessageACType = ReturnType<typeof updateMessage>
 type addPostACType = ReturnType<typeof addPost>
-type setUserProfile = ReturnType<typeof setUserProfile>
+type setUserProfileACType = ReturnType<typeof setUserProfile>
+type setProfileStatusACType = ReturnType<typeof setProfileStatus>
 
 let initialProfileState = {
     postsData: [
@@ -16,16 +21,17 @@ let initialProfileState = {
         {id: 3, message: "need 3rd?", likesCount: 45}
     ],
     newPostText: '',
-    profile:{aboutMe: '',
+    profile: {
+        aboutMe: '',
         contacts: {
             facebook: null,
             website: null,
-            vk:  null,
+            vk: null,
             twitter: null,
-            instagram:  null,
-            youtube:  null,
-            github:  null,
-            mainLink:  null
+            instagram: null,
+            youtube: null,
+            github: null,
+            mainLink: null
         },
         lookingForAJob: false,
         lookingForAJobDescription: null,
@@ -33,12 +39,15 @@ let initialProfileState = {
         userId: 1,
         photos: {
             small: null,
-            large:  null
-        }}
+            large: null
+        },
+        serverStatus: ''
+    }
+
 
 }
 
-export const ProfileReducer = (state: ProfilePageType = initialProfileState, action: ProfilePageActionType):ProfilePageType => {
+export const ProfileReducer = (state: ProfilePageType = initialProfileState, action: ProfilePageActionType): ProfilePageType => {
     switch (action.type) {
         case "UPDATE-MESSAGE": {
             let newState = {...state}
@@ -57,7 +66,11 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
             return newState
         }
         case "SET-USER-PROFILE": {
-            return {...state,profile:action.payload.profile}
+            return {...state, profile: action.payload.profile}
+        }
+        case "SET-PROFILE-STATUS": {
+            debugger
+            return {...state,profile:{...state.profile,serverStatus:action.payload.status}}
         }
         default:
             return state
@@ -79,19 +92,30 @@ export const addPost = () => {
         type: "ADD-POST",
     } as const
 }
-export const setUserProfile = (profile:ProfileType) => {
+export const setUserProfile = (profile: ProfileType) => {
     return {
-        type:"SET-USER-PROFILE",
+        type: "SET-USER-PROFILE",
         payload: {
             profile
         }
     } as const
 }
+export const setProfileStatus = (status: string) => {
+    return {
+        type: "SET-PROFILE-STATUS",
+        payload: {
+            status
+        }
+    } as const
+}
 
-export const getUserProfileThunkCreator = (userId:string) => {
-    return (dispatch:Dispatch) => {
-        API.getProfile(Number(userId)).then(data => {
+export const getUserProfileThunkCreator = (userId: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getProfile(Number(userId)).then(data => {
             dispatch(setUserProfile(data))
+        })
+        profileAPI.getStatus(Number(userId)).then(data => {
+            dispatch(setProfileStatus(data.status))
         })
     }
 

@@ -6,6 +6,7 @@ import {ProfileType} from "../../redux/State";
 
 export type ProfilePropsType = {
     profile:ProfileType,
+    status:string | null
 
 }
 
@@ -16,7 +17,8 @@ function Profile(props:ProfilePropsType) {
 
     return (
         <div>
-            <ProfileInfo profile = {props.profile}/>
+            <ProfileInfo profile = {props.profile}
+            status = {props.status}/>
             <MyPostsContainer  />
         </div>
     )

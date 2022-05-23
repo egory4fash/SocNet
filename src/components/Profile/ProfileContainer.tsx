@@ -12,6 +12,7 @@ export type ProfilePagePropsType = mapStateToPropsType & mapDispatchToPropsType
 
 export type mapStateToPropsType = {
     profile: ProfileType,
+    status:string | null
 
 }
 export type mapDispatchToPropsType = {
@@ -26,6 +27,7 @@ export type PropsType = RouteComponentProps<ParamType> & ProfilePagePropsType
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
+        status:state.profilePage.profile.serverStatus
 
     }
 }
@@ -43,7 +45,8 @@ class ProfileContainer extends React.Component<PropsType> {
 
         return (
             <Profile {...this.props}
-                     profile={this.props.profile}/>
+                     profile={this.props.profile}
+            status = {this.props.status}/>
         )
     }
 }

@@ -17,7 +17,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
         return (
             <div>
                <div>
-                   <Status status={'12345'}/>
+                   <Status status={props.status}/>
                </div>
                 <div className={classes.descriptionBlock}>
                     <h2>{props.profile.fullName ? props.profile.fullName : "No Name"}</h2>

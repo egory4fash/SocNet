@@ -22,7 +22,8 @@ export type DialogsType = {
 export type ProfilePageType = {
     postsData: Array<PostsType>
     newPostText: string,
-    profile:ProfileType
+    profile:ProfileType,
+
 }
 
 export type ProfileType = {
@@ -44,7 +45,8 @@ export type ProfileType = {
     photos: {
         small: string | null,
         large: string | null
-    }
+    },
+    serverStatus:string | null
 }
 
 export type DialogsPageType = {
