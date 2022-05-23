@@ -3,8 +3,8 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {ProfileType, RootStateType} from "../../redux/State";
 import {getUserProfileThunkCreator} from "../../redux/ProfileReducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
-import {WithAuthRedirect} from '../../hoc/withAuthRedirect'
+import { RouteComponentProps, withRouter} from "react-router-dom";
+
 import { compose } from 'redux';
 
 
@@ -34,7 +34,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) userId = '1'
+        if (!userId) userId = '22112'
         this.props.getUserProfileThunkCreator(userId)
     }
 

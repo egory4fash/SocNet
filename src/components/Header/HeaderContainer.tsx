@@ -2,9 +2,8 @@ import React from "react";
 import Header from "./Header";
 import {AuthDataType, RootStateType,} from "../../redux/State";
 import {connect} from "react-redux";
-import {changeAuthFetching, getAuthUserDataThunkCreator, setUserData} from "../../redux/AuthReducer";
-import {Preloader} from "../Preloader/Preloader";
-import {API} from "../../API/API";
+import { getAuthUserDataThunkCreator} from "../../redux/AuthReducer";
+
 
 
 export type HeaderContainerProps = mapStateToPropsType & mapDispatchToPropsType
@@ -14,7 +13,7 @@ export type mapStateToPropsType = {
     isFetching: boolean
 }
 export type mapDispatchToPropsType = {
-    getAuthUserDataThunkCreator:() => void
+    getAuthUserDataThunkCreator: () => void
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
@@ -31,12 +30,12 @@ class HeaderContainer extends React.Component<HeaderContainerProps> {
     }
 
     render() {
-
         return (
             <>
 
-                    <Header email={this.props.data?.email || 'padla'}
-                            login={this.props.data?.login || 'rabotai'}/>
+                <Header email={this.props.data?.email || 'padla'}
+                        login={this.props.data?.login || 'rabotai'}
+                />
 
 
             </>

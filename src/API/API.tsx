@@ -36,12 +36,26 @@ export const API = {
     },
 
     getProfile (userId:number) {
-        return instance.get<ProfileType>(`profile/${userId}`).then(responce => {
+        return profileAPI.getProfile(userId)
+        }
+
+}
+
+export const profileAPI = {
+
+    getProfile(userId: number) {
+        return instance.get<ProfileType>(`profile/${userId}`)
+            .then(responce => {
             return responce.data
         })
+    },
+    getStatus(userId:number) {
+        return instance.get(`profile/status/${userId}`)
+            .then(res => {
+                return res.data
+            }
+        )
     }
-
-
 }
 
 

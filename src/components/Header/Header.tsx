@@ -5,7 +5,8 @@ import classes from "./Header.module.css";
 
 type HeaderPropsType = {
     email: string,
-    login: string
+    login: string,
+
 }
 
 function Header(props: HeaderPropsType) {
