@@ -1,18 +1,25 @@
 import React, {useState} from 'react'
 
- class Status extends React.Component<any, any>  {
+
+type StatusPropsType = {
+    status:string
+}
+
+ class Status extends React.Component<StatusPropsType>  {
 
     state = {
         editMode:false
     }
 
-     editModeActivate() {
+     editModeActivate = () => {
+        debugger
+         console.log(this)
         this.setState({
             editMode:true
         })
     }
 
-     editModeDeactivate() {
+     editModeDeactivate = () => {
          this.setState({
              editMode:false
          })
@@ -24,10 +31,10 @@ import React, {useState} from 'react'
         <>
             {!this.state.editMode ?
                 <div>
-                    <span onDoubleClick={this.editModeActivate.bind(this)}>{this.props.status}</span>
+                    <span onDoubleClick={this.editModeActivate}>{this.props.status}</span>
                 </div> :
                 <div>
-                    <input autoFocus={true} onBlur={this.editModeDeactivate.bind(this)} value={this.props.status}/>
+                    <input autoFocus={true} onBlur={this.editModeDeactivate} value={this.props.status}/>
                 </div>
             }
         </>
