@@ -1,7 +1,6 @@
 import {PostsType, ProfilePageType, ProfileType,} from "./State";
 import {Dispatch} from "redux";
-import {API, profileAPI} from "../API/API";
-import profile from "../components/Profile/Profile";
+import {profileAPI} from "../API/API";
 
 
 export type ProfilePageActionType = updateMessageACType |
@@ -41,7 +40,7 @@ let initialProfileState = {
             small: null,
             large: null
         },
-        serverStatus: ''
+        serverStatus: null
     }
 
 
@@ -69,12 +68,9 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
             return {...state, profile: action.payload.profile}
         }
         case "SET-PROFILE-STATUS": {
-
-            if (action.payload.status === null) {
-                return {...state,profile:{...state.profile,serverStatus:'No status CASE'}}
-            } else {
-            return {...state,profile:{...state.profile,serverStatus:action.payload.status}}}
+            return {...state, profile: {...state.profile, serverStatus: action.payload.status}}
         }
+
         default:
             return state
     }
@@ -120,6 +116,7 @@ export const getUserProfileThunkCreator = (userId: string) => {
 
         profileAPI.getStatus(Number(userId)).then(status => {
             dispatch(setProfileStatus(status))
+
 
         })
     }

@@ -1,44 +1,45 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 
 type StatusPropsType = {
-    status:string | null
+    status: string | null
 }
 
- class Status extends React.Component<StatusPropsType>  {
+class Status extends React.Component<StatusPropsType> {
 
     state = {
-        editMode:false
+        editMode: false
     }
 
-     editModeActivate = () => {
-        debugger
-         console.log(this)
+    editModeActivate = () => {
         this.setState({
-            editMode:true
+            editMode: true
         })
     }
 
-     editModeDeactivate = () => {
-         this.setState({
-             editMode:false
-         })
-     }
+    editModeDeactivate = () => {
+        this.setState({
+            editMode: false
+        })
+    }
 
 
     render() {
-    return (
-        <>
-            {!this.state.editMode ?
-                <div>
-                    <span onDoubleClick={this.editModeActivate}>{this.props.status}</span>
-                </div> :
-                <div>
-                    <input autoFocus={true} onBlur={this.editModeDeactivate} value={this.props.status? this.props.status:"no status"}/>
-                </div>
-            }
-        </>
-    )}
+        let statusValue = this.props.status === null ? "no status yet" : this.props.status
+        return (
+            <>
+                {!this.state.editMode ?
+                    <div>
+                        <span onDoubleClick={this.editModeActivate}>{statusValue}</span>
+                    </div> :
+                    <div>
+                        <input autoFocus={true} onBlur={this.editModeDeactivate}
+                               value={statusValue}/>
+                    </div>
+                }
+            </>
+        )
+    }
 }
 
-export  default Status
+export default Status

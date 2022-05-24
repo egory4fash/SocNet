@@ -3,16 +3,16 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {ProfileType, RootStateType} from "../../redux/State";
 import {getUserProfileThunkCreator} from "../../redux/ProfileReducer";
-import { RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
-import { compose } from 'redux';
+import {compose} from 'redux';
 
 
 export type ProfilePagePropsType = mapStateToPropsType & mapDispatchToPropsType
 
 export type mapStateToPropsType = {
     profile: ProfileType,
-    status:string | null
+    status: string | null
 
 }
 export type mapDispatchToPropsType = {
@@ -27,7 +27,7 @@ export type PropsType = RouteComponentProps<ParamType> & ProfilePagePropsType
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        status:state.profilePage.profile.serverStatus
+        status: state.profilePage.profile.serverStatus
 
     }
 }
@@ -45,14 +45,12 @@ class ProfileContainer extends React.Component<PropsType> {
 
 
         return (
-            <Profile {...this.props}
-                     profile={this.props.profile}
-            status = {this.props.status}/>
+            <Profile
+                profile={this.props.profile}
+                status={this.props.status}/>
         )
     }
 }
-
-
 
 
 export default compose<React.ComponentType>(

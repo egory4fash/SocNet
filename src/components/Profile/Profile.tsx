@@ -7,7 +7,7 @@ import {ProfileType} from "../../redux/State";
 export type ProfilePropsType = {
     profile:ProfileType,
     status:string | null
-    //status:any
+
 
 }
 

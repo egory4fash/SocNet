@@ -17,14 +17,14 @@ export const ProfileInfo = (props: ProfilePropsType) => {
         return (
             <div>
                <div>
-                   <Status status={props.status? props.status:"PROFILEINFO"}/>
+                   <Status status={props.status}/>
                </div>
                 <div className={classes.descriptionBlock}>
                     <h2>{props.profile.fullName ? props.profile.fullName : "No Name"}</h2>
                     {props.profile.aboutMe ? <div> {props.profile.aboutMe} </div> : <div>About me</div>}
                     {props.profile.photos.large
                         ? <img src={props.profile.photos.large} alt='big-pic'/> :
-                        <img src = {'https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg?20160324051252'} alt='no user photo' />}
+                        <img src = {'https://upload.wikimedia.org/wikipedia/en/6/60/No_Picture.jpg?20160324051252'} alt='no user face)' />}
                     {props.profile.photos.small ? <img src={props.profile.photos.small} alt='small-pic'/> : <p>''</p>}
                     {props.profile.contacts ? <ul>
                             <li>{props.profile.contacts.vk ? props.profile.contacts.vk : ""}</li>
