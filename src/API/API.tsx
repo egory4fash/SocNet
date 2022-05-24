@@ -56,6 +56,7 @@ export const profileAPI = {
                 return res.data
             }
         )
+        debugger
     },
     updateStatus(userId:string) {
         return instance.put(`status`,{status:status})

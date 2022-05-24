@@ -69,8 +69,11 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
             return {...state, profile: action.payload.profile}
         }
         case "SET-PROFILE-STATUS": {
-            debugger
-            return {...state,profile:{...state.profile,serverStatus:action.payload.status}}
+
+            if (action.payload.status === null) {
+                return {...state,profile:{...state.profile,serverStatus:'No status CASE'}}
+            } else {
+            return {...state,profile:{...state.profile,serverStatus:action.payload.status}}}
         }
         default:
             return state
@@ -100,7 +103,7 @@ export const setUserProfile = (profile: ProfileType) => {
         }
     } as const
 }
-export const setProfileStatus = (status: string) => {
+export const setProfileStatus = (status: string | null) => {
     return {
         type: "SET-PROFILE-STATUS",
         payload: {
@@ -114,8 +117,10 @@ export const getUserProfileThunkCreator = (userId: string) => {
         profileAPI.getProfile(Number(userId)).then(data => {
             dispatch(setUserProfile(data))
         })
-        profileAPI.getStatus(Number(userId)).then(data => {
-            dispatch(setProfileStatus(data.status))
+
+        profileAPI.getStatus(Number(userId)).then(status => {
+            dispatch(setProfileStatus(status))
+
         })
     }
 

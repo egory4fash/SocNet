@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 
 type StatusPropsType = {
-    status:string
+    status:string | null
 }
 
  class Status extends React.Component<StatusPropsType>  {
@@ -34,7 +34,7 @@ type StatusPropsType = {
                     <span onDoubleClick={this.editModeActivate}>{this.props.status}</span>
                 </div> :
                 <div>
-                    <input autoFocus={true} onBlur={this.editModeDeactivate} value={this.props.status}/>
+                    <input autoFocus={true} onBlur={this.editModeDeactivate} value={this.props.status? this.props.status:"no status"}/>
                 </div>
             }
         </>
