@@ -30,9 +30,14 @@ class Status extends React.Component<StatusPropsType> {
     onStatusChange = (e:ChangeEvent<HTMLInputElement>) => {
         this.setState( {
             status:e.currentTarget.value
-
         })
-
+    }
+    componentDidUpdate(prevProps: Readonly<StatusPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (prevProps.status !== this.props.status) {
+           this.setState({
+               status:this.props.status
+           })
+        }
     }
 
 
