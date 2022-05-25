@@ -1,6 +1,6 @@
 import axios from "axios";
 import {ProfileType} from "../redux/State";
-import status from "../components/Profile/ProfileInfo/Status";
+
 
 
 const instance = axios.create({
@@ -59,7 +59,7 @@ export const profileAPI = {
 
     },
     updateStatus(status:string) {
-        return instance.put(`status`,{status:status})
+        return instance.put(`profile/status`,{status:status})
     }
 }
 

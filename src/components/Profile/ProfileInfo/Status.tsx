@@ -30,18 +30,21 @@ class Status extends React.Component<StatusPropsType> {
     onStatusChange = (e:ChangeEvent<HTMLInputElement>) => {
         this.setState( {
             status:e.currentTarget.value
+
         })
+
     }
 
 
     render() {
-        let statusValue = this.props.status === null ? "no status yet" : this.state.status
+
+        let statusValue = this.props.status === null ? "no status yet" : this.props.status
 
         return (
             <>
                 {!this.state.editMode ?
                     <div>
-                        <span onDoubleClick={this.editModeActivate}>{statusValue}</span>
+                        <div onDoubleClick={this.editModeActivate}>{statusValue || "------"}</div>
                     </div> :
                     <div>
                         <input
