@@ -8,10 +8,12 @@ export type ProfilePageActionType = updateMessageACType |
     setUserProfileACType |
     setProfileStatusACType
 
+
 type updateMessageACType = ReturnType<typeof updateMessage>
 type addPostACType = ReturnType<typeof addPost>
 type setUserProfileACType = ReturnType<typeof setUserProfile>
 type setProfileStatusACType = ReturnType<typeof setProfileStatus>
+
 
 let initialProfileState = {
     postsData: [
@@ -71,6 +73,7 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
             return {...state, profile: {...state.profile, serverStatus: action.payload.status}}
         }
 
+
         default:
             return state
     }
@@ -108,6 +111,8 @@ export const setProfileStatus = (status: string | null) => {
     } as const
 }
 
+
+
 export const getUserProfileThunkCreator = (userId: string) => {
     return (dispatch: Dispatch) => {
         profileAPI.getProfile(Number(userId)).then(data => {
@@ -116,10 +121,17 @@ export const getUserProfileThunkCreator = (userId: string) => {
 
         profileAPI.getStatus(Number(userId)).then(status => {
             dispatch(setProfileStatus(status))
+        })
+    }
+}
 
+export const updateStatusThunkCreator = (status:string) => {
+    return (dispatch:Dispatch) => {
+        profileAPI.updateStatus(status).then(res => {
+            if (res.data.resultCode === 0)
+            {dispatch(setProfileStatus(status))}
 
         })
     }
-
 }
 

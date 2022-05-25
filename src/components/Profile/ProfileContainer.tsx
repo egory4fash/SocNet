@@ -2,7 +2,7 @@ import React from 'react'
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {ProfileType, RootStateType} from "../../redux/State";
-import {getUserProfileThunkCreator} from "../../redux/ProfileReducer";
+import {getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/ProfileReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 import {compose} from 'redux';
@@ -17,6 +17,7 @@ export type mapStateToPropsType = {
 }
 export type mapDispatchToPropsType = {
     getUserProfileThunkCreator: (userId: string) => void
+    updateStatusThunkCreator: (status: string) => void
 }
 
 export type ParamType = {
@@ -47,7 +48,8 @@ class ProfileContainer extends React.Component<PropsType> {
         return (
             <Profile
                 profile={this.props.profile}
-                status={this.props.status}/>
+                status={this.props.status}
+                updateStatus={this.props.updateStatusThunkCreator}/>
         )
     }
 }
@@ -56,7 +58,7 @@ class ProfileContainer extends React.Component<PropsType> {
 export default compose<React.ComponentType>(
     connect<mapStateToPropsType, mapDispatchToPropsType,
         {},
-        RootStateType>(mapStateToProps, {getUserProfileThunkCreator}),
+        RootStateType>(mapStateToProps, {getUserProfileThunkCreator, updateStatusThunkCreator}),
     withRouter,
     // WithAuthRedirect
 )(ProfileContainer)
