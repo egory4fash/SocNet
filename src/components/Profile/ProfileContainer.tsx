@@ -6,6 +6,7 @@ import {getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 import {compose} from 'redux';
+import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 export type ProfilePagePropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -60,5 +61,5 @@ export default compose<React.ComponentType>(
         {},
         RootStateType>(mapStateToProps, {getUserProfileThunkCreator, updateStatusThunkCreator}),
     withRouter,
-    // WithAuthRedirect
+    WithAuthRedirect
 )(ProfileContainer)

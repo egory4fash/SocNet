@@ -2,7 +2,7 @@ import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../redux/State";
-import {updateStatusThunkCreator} from "../../redux/ProfileReducer";
+
 
 
 export type ProfilePropsType = {
