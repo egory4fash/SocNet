@@ -4,7 +4,9 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Redirect} from "react-router-dom";
-import {AddMessageForm, AddMessageReduxForm} from "./Message/AddMessageForm";
+import {AddMessageReduxForm} from "./Message/AddMessageForm";
+
+
 
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -18,27 +20,24 @@ const Dialogs = (props: DialogsPropsType) => {
     const messageElements = props.messagesData.map((elem) =>
         <Message key={elem.id} message={elem.message}/>
     )
-    const NewMessageElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
-    const addMessage = () => {
 
-        const newMessage = NewMessageElement.current ? NewMessageElement.current.value : ""
-        props.addMessage(newMessage)
-    }
+
 
 // if (!props.isAuth ) return <Redirect to={'/login'} />
+
+    const addNewMessage = (values:any) => {
+        console.log(values.NewMessageBody)
+        props.addMessage(values.NewMessageBody)
+    }
 
     return (
 
 
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>
-
                 {dialogsElements}
-                <AddMessageReduxForm />
-
-
-
+                <AddMessageReduxForm onSubmit = {addNewMessage}/>
             </div>
             <div className={classes.messages}>
                 {messageElements}

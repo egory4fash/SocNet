@@ -2,6 +2,7 @@ import React from "react";
 import Posts from "./Posts/Posts";
 import classes from "./MyPosts.module.css";
 import {MyPostsPropsType} from "./MyPostsContainer";
+import {AddPostReduxForm} from "./Posts/AddPostForm";
 
 
 type myPostsPropsType = {
@@ -12,37 +13,24 @@ type myPostsPropsType = {
     }>
     newPostText: string
     onPostChangeTest: (text: string) => void
-    addPost: () => void
+    addPost: (newPost:string) => void
 }
 
 
 export function MyPosts(props: MyPostsPropsType) {
 
-
+    console.log('props.postsData', props.postsData)
     const postElements = props.postsData.map(elem =>
         <Posts id={elem.id} message={elem.message} likesCount={elem.likesCount}/>)
 
-    const NewPostElement: React.RefObject<HTMLTextAreaElement> = React.createRef()
 
-    const addPost = () => {
-        props.addPost()
-    }
 
-    const onPostChangeHandler = () => {
-        let text = NewPostElement.current ? NewPostElement.current.value : ""
-        props.onPostChange(text)
+    const addNewPost = (values: any) => {
+        props.addPost(values.NewPostBody)
     }
     return (<div className={classes.postsBlock}>
         <h3>My posts</h3>
-        <div><textarea
-            onChange={onPostChangeHandler} ref={NewPostElement}
-            className={classes.item}
-            value={props.newPostText}>
-
-            </textarea></div>
-        <div>
-            <button onClick={addPost}>Add post</button>
-        </div>
+        <AddPostReduxForm onSubmit={addNewPost}/>
         <div className={classes.posts}>
             {postElements}
         </div>

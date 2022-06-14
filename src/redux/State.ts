@@ -21,7 +21,6 @@ export type DialogsType = {
 
 export type ProfilePageType = {
     postsData: Array<PostsType>
-    newPostText: string,
     profile:ProfileType,
 
 }

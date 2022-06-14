@@ -1,19 +1,27 @@
 import React from 'react'
-import {Field, reduxForm} from "redux-form";
-import {FormDataType, LoginForm} from "../../../Login/LoginForm";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 
-export const AddMessageForm = (props:any) => {
+export type AddMessageFormDataType = {
+    message:string
+}
+
+
+export const AddMessageForm:React.FC<InjectedFormProps<AddMessageFormDataType>> = (props) => {
     return (
 
             <form onSubmit={props.handleSubmit}>
-                    <Field component = 'textarea' name = 'NewMessageBody' placeholder='Enter your message'>
-                </Field>
+                <div>
+                    <Field component = 'textarea' name = 'NewMessageBody' placeholder='Enter your message'/>
+                </div>
+                <div>
+                    <button>send</button>
+                </div>
             </form>
 
     )
 }
 
-export const AddMessageReduxForm = reduxForm<FormDataType>({
+export const AddMessageReduxForm = reduxForm<AddMessageFormDataType>({
     form: 'dialogAddMessageForm'
 })(AddMessageForm)

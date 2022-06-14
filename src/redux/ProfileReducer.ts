@@ -3,13 +3,13 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../API/API";
 
 
-export type ProfilePageActionType = updateMessageACType |
+export type ProfilePageActionType =
     addPostACType |
     setUserProfileACType |
     setProfileStatusACType
 
 
-type updateMessageACType = ReturnType<typeof updateMessage>
+
 type addPostACType = ReturnType<typeof addPost>
 type setUserProfileACType = ReturnType<typeof setUserProfile>
 type setProfileStatusACType = ReturnType<typeof setProfileStatus>
@@ -21,7 +21,6 @@ let initialProfileState = {
         {id: 2, message: "2nd post bro", likesCount: 23},
         {id: 3, message: "need 3rd?", likesCount: 45}
     ],
-    newPostText: '',
     profile: {
         aboutMe: '',
         contacts: {
@@ -50,21 +49,18 @@ let initialProfileState = {
 
 export const ProfileReducer = (state: ProfilePageType = initialProfileState, action: ProfilePageActionType): ProfilePageType => {
     switch (action.type) {
-        case "UPDATE-MESSAGE": {
-            let newState = {...state}
-            newState.newPostText = action.updateMessage
-            return newState
-        }
+
         case "ADD-POST" : {
             const newPost: PostsType = {
                 id: 5,
-                message: state.newPostText,
+                message: action.payload.newPostText,
                 likesCount: 0
             }
-            let newState = {...state}
-            newState.postsData.push(newPost)
-            newState.newPostText = ''
-            return newState
+
+            // let newState = {...state}
+            // newState.postsData.push(newPost)
+            // console.log(newState)
+            return {...state, postsData: [...state.postsData, newPost]}
         }
         case "SET-USER-PROFILE": {
             return {...state, profile: action.payload.profile}
@@ -81,17 +77,14 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
 }
 
 
-export const updateMessage = (updateMessage: string) => {
-    return {
-        type: "UPDATE-MESSAGE",
-        updateMessage: updateMessage
-    } as const
-}
 
-
-export const addPost = () => {
+export const addPost = (newPostText:string) => {
     return {
         type: "ADD-POST",
+        payload: {
+            newPostText
+        }
+
     } as const
 }
 export const setUserProfile = (profile: ProfileType) => {
