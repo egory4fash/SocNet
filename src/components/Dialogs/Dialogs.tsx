@@ -4,6 +4,7 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Redirect} from "react-router-dom";
+import {AddMessageForm, AddMessageReduxForm} from "./Message/AddMessageForm";
 
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -34,17 +35,9 @@ const Dialogs = (props: DialogsPropsType) => {
             <div className={classes.dialogsItems}>
 
                 {dialogsElements}
-                <div>
-                    <textarea
-                        ref={NewMessageElement}
-                        className={classes.item}
-                        placeholder={'Enter your message'}>
-                </textarea>
-                </div>
+                <AddMessageReduxForm />
 
-                <div>
-                    <button onClick={addMessage}>Add message</button>
-                </div>
+
 
             </div>
             <div className={classes.messages}>
