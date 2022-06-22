@@ -1,4 +1,4 @@
-export const requiredField = (value: any) => {
+export const requiredField = (value: string | number) => {
     if (value) {
         return undefined
     } else {

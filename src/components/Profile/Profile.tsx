@@ -13,6 +13,7 @@ export type ProfilePropsType = {
 
 
 function Profile(props: ProfilePropsType) {
+    debugger
 
 
     return (

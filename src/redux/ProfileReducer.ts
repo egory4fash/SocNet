@@ -62,7 +62,9 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
             return {...state, profile: action.payload.profile}
         }
         case "SET-PROFILE-STATUS": {
-            return {...state, profile: {...state.profile, serverStatus: action.payload.status}}
+            let newState = {...state, profile: {...state.profile, serverStatus: action.payload.status}}
+            console.log(newState)
+            return newState
         }
 
 
@@ -119,6 +121,7 @@ export const updateStatusThunkCreator = (status:string) => {
         profileAPI.updateStatus(status).then(res => {
             if (res.data.resultCode === 0)
             {dispatch(setProfileStatus(status))}
+
 
         })
     }
