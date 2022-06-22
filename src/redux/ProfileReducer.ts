@@ -56,11 +56,7 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
                 message: action.payload.newPostText,
                 likesCount: 0
             }
-
-            // let newState = {...state}
-            // newState.postsData.push(newPost)
-            // console.log(newState)
-            return {...state, postsData: [...state.postsData, newPost]}
+            return {...state, postsData: [newPost,...state.postsData]}
         }
         case "SET-USER-PROFILE": {
             return {...state, profile: action.payload.profile}

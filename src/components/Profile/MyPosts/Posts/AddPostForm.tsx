@@ -1,19 +1,20 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {AddMessageForm, AddMessageFormDataType} from "../../../Dialogs/Message/AddMessageForm";
+import { maxLenghtCreator, requiredField} from "../../../../validators/validators";
+import {CustomTextArea} from "../../../../formControls/FormControls";
 
 
 export type AddPostFormDataType = {
     message: string
 }
 
-
+let maxLenght = maxLenghtCreator(10)
 export const AddPostForm: React.FC<InjectedFormProps<AddPostFormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
 
                 <Field
-                    component='textarea' name='NewPostBody' placeholder='Post something'>
+                    component={CustomTextArea} name='NewPostBody' placeholder='Post something' validate={[requiredField,maxLenght]}>
                 </Field>
 
             <div>
