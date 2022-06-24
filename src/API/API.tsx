@@ -19,22 +19,20 @@ export const API = {
     },
 
     follow (userId:number) {
-        return instance.post(`follow/${userId}`).then(responce => {
+        return instance.post(`follow/${userId}`)
+            .then(responce => {
             return responce.data
         })
     },
 
     unfollow (userId:number) {
-        return instance.delete(`follow/${userId}`).then(responce => {
+        return instance.delete(`follow/${userId}`)
+            .then(responce => {
             return responce.data
         })
     },
 
-    auth () {
-        return instance.get('auth/me').then(responce => {
-            return responce.data
-        })
-    },
+
 
     getProfile (userId:number) {
         return profileAPI.getProfile(userId)
@@ -61,6 +59,25 @@ export const profileAPI = {
     updateStatus(status:string) {
         return instance.put(`profile/status`,{status:status})
     }
+}
+
+export const authAPI = {
+    auth () {
+        return instance.get('auth/me')
+            .then(responce => {
+            return responce.data
+        })
+    },
+    login (email:string,password:string,rememberMe:boolean) {
+        return instance.post('auth/login',{email,password,rememberMe })
+            .then(res => {
+                return res.data
+            })
+    },
+    logout ()  {
+        return instance.delete('auth/login')
+
+}
 }
 
 

@@ -1,6 +1,8 @@
 import {AuthDataType, AuthGlobalDataType} from "./State";
-import {Dispatch} from "redux";
-import {API} from "../API/API";
+import {AnyAction, Dispatch} from "redux";
+import {authAPI} from "../API/API";
+import {ReduxStateType} from "./Redux-Store";
+import {ThunkAction} from "redux-thunk";
 
 export type AuthActionType = SetUserDataType | ChangeAuthFetchingACType
 
@@ -60,7 +62,7 @@ export const changeAuthFetching = (isFetching: boolean) => {
 
 export const getAuthUserDataThunkCreator = () => {
     return (dispatch: Dispatch) => {
-        API.auth().then(data => {
+        authAPI.auth().then(data => {
             if (data.resultCode === 0) {
                 dispatch(setUserData(data.data))
                 dispatch(changeAuthFetching(false))
@@ -68,5 +70,17 @@ export const getAuthUserDataThunkCreator = () => {
             }
         })
     }
+}
 
+export type AppThunk = ThunkAction<void, ReduxStateType, unknown, AnyAction>
+
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean):AppThunk => {
+    return (dispatch) => {
+        authAPI.login(email, password, rememberMe).then(data => {
+            if (data.resultcode === 0) {
+                dispatch(getAuthUserDataThunkCreator())
+
+            }
+        })
+    }
 }
