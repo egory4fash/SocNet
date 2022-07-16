@@ -19,7 +19,7 @@ type myPostsPropsType = {
 
 export function MyPosts(props: MyPostsPropsType) {
 
-    console.log('props.postsData', props.postsData)
+
     const postElements = props.postsData.map(elem =>
         <Posts id={elem.id} message={elem.message} likesCount={elem.likesCount}/>)
 

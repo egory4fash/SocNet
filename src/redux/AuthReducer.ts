@@ -25,8 +25,7 @@ let initialAuthData = {
 export const AuthReducer = (state: AuthGlobalDataType = initialAuthData, action: AuthActionType): AuthGlobalDataType => {
     switch (action.type) {
         case "SET-USER-DATA": {
-            let newState = {...state, data: action.payload.data, isLogined: true}
-            console.log(newState)
+            let newState = {...state, data: action.payload.data, isLogined: action.payload.isLogined}
             return newState
         }
         case "CHANGE-AUTH-FETCHING": {
@@ -41,11 +40,12 @@ export const AuthReducer = (state: AuthGlobalDataType = initialAuthData, action:
 }
 
 
-export const setUserData = (data: AuthDataType) => {
+export const setUserData = (data: AuthDataType,isLogined:boolean) => {
     return {
         type: "SET-USER-DATA",
         payload: {
-            data
+            data,
+            isLogined
         }
     } as const
 }
@@ -64,7 +64,7 @@ export const getAuthUserDataThunkCreator = () => {
     return (dispatch: Dispatch) => {
         authAPI.auth().then(data => {
             if (data.resultCode === 0) {
-                dispatch(setUserData(data.data))
+                dispatch(setUserData(data.data,true))
                 dispatch(changeAuthFetching(false))
 
             }
@@ -76,11 +76,28 @@ export type AppThunk = ThunkAction<void, ReduxStateType, unknown, AnyAction>
 
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean):AppThunk => {
     return (dispatch) => {
-        authAPI.login(email, password, rememberMe).then(data => {
+        authAPI.login(email, password, rememberMe)
+            .then(data => {
             if (data.resultcode === 0) {
                 dispatch(getAuthUserDataThunkCreator())
 
             }
         })
+    }
+}
+export const logOutThunkCreator = () => {
+    return (dispatch:Dispatch) => {
+        authAPI.logout()
+            .then(data => {
+                if (data.resultcode === 0) {
+                    dispatch(setUserData( {
+                        id: 0,
+                        email: '' ,
+                        login: ''
+                    },false))
+
+
+                }
+            })
     }
 }

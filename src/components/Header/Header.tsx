@@ -11,7 +11,7 @@ type HeaderPropsType = {
 
 function Header(props: HeaderPropsType) {
 
-    console.log(props)
+
     return (
         <header className={classes.header}>
             <img
