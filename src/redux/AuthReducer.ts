@@ -25,8 +25,8 @@ let initialAuthData = {
 export const AuthReducer = (state: AuthGlobalDataType = initialAuthData, action: AuthActionType): AuthGlobalDataType => {
     switch (action.type) {
         case "SET-USER-DATA": {
-            let newState = {...state, data: action.payload.data, isLogined: action.payload.isLogined}
-            return newState
+            return {...state, data: action.payload.data, isLogined: action.payload.isLogined}
+
         }
         case "CHANGE-AUTH-FETCHING": {
             return {
@@ -78,7 +78,7 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
     return (dispatch) => {
         authAPI.login(email, password, rememberMe)
             .then(data => {
-            if (data.resultcode === 0) {
+            if (data.resultCode === 0) {
                 dispatch(getAuthUserDataThunkCreator())
 
             }
@@ -89,7 +89,8 @@ export const logOutThunkCreator = () => {
     return (dispatch:Dispatch) => {
         authAPI.logout()
             .then(data => {
-                if (data.resultcode === 0) {
+                if (data.resultCode === 0) {
+                    console.log('123')
                     dispatch(setUserData( {
                         id: 0,
                         email: '' ,

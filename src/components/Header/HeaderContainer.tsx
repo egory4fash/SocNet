@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import {AuthDataType, RootStateType,} from "../../redux/State";
 import {connect} from "react-redux";
-import { getAuthUserDataThunkCreator} from "../../redux/AuthReducer";
+import {getAuthUserDataThunkCreator, logOutThunkCreator} from "../../redux/AuthReducer";
 
 
 
@@ -10,16 +10,19 @@ export type HeaderContainerProps = mapStateToPropsType & mapDispatchToPropsType
 
 export type mapStateToPropsType = {
     data: AuthDataType,
-    isFetching: boolean
+    isFetching: boolean,
+    isLogined: boolean
 }
 export type mapDispatchToPropsType = {
-    getAuthUserDataThunkCreator: () => void
+    getAuthUserDataThunkCreator: () => void,
+    logOutThunkCreator: () => void
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
         data: state.auth.data,
-        isFetching: state.auth.isFetching
+        isFetching: state.auth.isFetching,
+        isLogined:state.auth.isLogined
     }
 }
 
@@ -33,8 +36,10 @@ class HeaderContainer extends React.Component<HeaderContainerProps> {
         return (
             <>
 
-                <Header email={this.props.data?.email || 'padla'}
-                        login={this.props.data?.login || 'rabotai'}
+                <Header email={this.props.data?.email || ''}
+                        login={this.props.data?.login || ''}
+                        isLogined={this.props.isLogined}
+                        logOut = {this.props.logOutThunkCreator}
                 />
 
 
@@ -47,5 +52,5 @@ class HeaderContainer extends React.Component<HeaderContainerProps> {
 export default connect<mapStateToPropsType, mapDispatchToPropsType,
     {},
     RootStateType>(mapStateToProps, {
-    getAuthUserDataThunkCreator
+    getAuthUserDataThunkCreator,logOutThunkCreator
 })(HeaderContainer)
