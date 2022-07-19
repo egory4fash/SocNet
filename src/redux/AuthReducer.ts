@@ -82,7 +82,7 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
                 dispatch(getAuthUserDataThunkCreator())
             }else {
                 console.log('asdasdasd')
-                let action = stopSubmit('password',{_error:"Common error"})
+                let action = stopSubmit('login',{_error:"Common error"})
                 console.log(action)
                 dispatch(action)
             }
