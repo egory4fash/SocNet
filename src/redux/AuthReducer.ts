@@ -3,6 +3,7 @@ import {AnyAction, Dispatch} from "redux";
 import {authAPI} from "../API/API";
 import {ReduxStateType} from "./Redux-Store";
 import {ThunkAction} from "redux-thunk";
+import {stopSubmit} from "redux-form";
 
 export type AuthActionType = SetUserDataType | ChangeAuthFetchingACType
 
@@ -66,7 +67,6 @@ export const getAuthUserDataThunkCreator = () => {
             if (data.resultCode === 0) {
                 dispatch(setUserData(data.data,true))
                 dispatch(changeAuthFetching(false))
-
             }
         })
     }
@@ -80,7 +80,11 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
             .then(data => {
             if (data.resultCode === 0) {
                 dispatch(getAuthUserDataThunkCreator())
-
+            }else {
+                console.log('asdasdasd')
+                let action = stopSubmit('password',{_error:"Common error"})
+                console.log(action)
+                dispatch(action)
             }
         })
     }
