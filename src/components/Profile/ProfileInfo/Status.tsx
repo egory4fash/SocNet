@@ -49,6 +49,7 @@ class Status extends React.Component<StatusPropsType> {
             <>
                 {!this.state.editMode ?
                     <div>
+                        status:
                         <div onDoubleClick={this.editModeActivate}>{statusValue || "------"}</div>
                     </div> :
                     <div>

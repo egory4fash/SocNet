@@ -1,6 +1,7 @@
 .header {
     grid-area: h;
     background-color: azure;
+    border: 1px solid black;
 }
 .header img {
     width: 100px;

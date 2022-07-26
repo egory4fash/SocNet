@@ -11,9 +11,29 @@ const instance = axios.create({
     }
 })
 
+
+
+type UsersType = {
+    name: string,
+    id: number,
+    uniqueUrlName: string | null,
+    photos: {
+        small: string | null,
+        large: string | null
+    },
+    status: string | null,
+    followed: boolean
+}
+
+type GetUsersResponseType = {
+    items:Array<UsersType>,
+    totalCount: number,
+    error: string | null
+}
+
 export const API = {
     getUsers  (currentPage:number = 1,pageSize:number = 10)  {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`,)
+        return instance.get<GetUsersResponseType>(`users?page=${currentPage}&count=${pageSize}`,)
             .then(response => {
             return response.data})
     },
