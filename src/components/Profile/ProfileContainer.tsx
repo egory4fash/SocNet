@@ -29,7 +29,7 @@ export type PropsType = RouteComponentProps<ParamType> & ProfilePagePropsType
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.profile.serverStatus
+        status: state.profilePage.serverStatus
 
     }
 }

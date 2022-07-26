@@ -40,9 +40,8 @@ let initialProfileState = {
         photos: {
             small: null,
             large: null
-        },
-        serverStatus: null
-    }
+        }
+    },serverStatus: null
 
 
 }
@@ -62,9 +61,7 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
             return {...state, profile: action.payload.profile}
         }
         case "SET-PROFILE-STATUS": {
-            let newState = {...state, profile: {...state.profile, serverStatus: action.payload.status}}
-            console.log(newState)
-            return newState
+            return  {...state, serverStatus: action.payload.status}
         }
 
 

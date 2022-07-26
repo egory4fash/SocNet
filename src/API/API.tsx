@@ -1,5 +1,6 @@
-import axios from "axios";
-import {ProfileType} from "../redux/State";
+import axios, {AxiosResponse} from "axios";
+import {AuthDataType, ProfileType} from "../redux/State";
+
 
 
 
@@ -30,6 +31,20 @@ type GetUsersResponseType = {
     totalCount: number,
     error: string | null
 }
+type CommonResponseType = {
+    data:AuthDataType ,
+    messages: Array<string>,
+    fieldsErrors: Array<string>,
+    resultCode: number
+}
+type LoginType = {
+    email:string
+    password:string
+    rememberMe?: boolean
+    captcha?:boolean
+}
+
+
 
 export const API = {
     getUsers  (currentPage:number = 1,pageSize:number = 10)  {
@@ -39,20 +54,18 @@ export const API = {
     },
 
     follow (userId:number) {
-        return instance.post(`follow/${userId}`)
+        return instance.post<CommonResponseType>(`follow/${userId}`)
             .then(responce => {
             return responce.data
         })
     },
 
     unfollow (userId:number) {
-        return instance.delete(`follow/${userId}`)
+        return instance.delete<CommonResponseType>(`follow/${userId}`)
             .then(responce => {
             return responce.data
         })
     },
-
-
 
     getProfile (userId:number) {
         return profileAPI.getProfile(userId)
@@ -69,7 +82,7 @@ export const profileAPI = {
         })
     },
     getStatus(userId:number) {
-        return instance.get(`profile/status/${userId}`)
+        return instance.get<string>(`profile/status/${userId}`)
             .then(res => {
                 return res.data
             }
@@ -77,25 +90,25 @@ export const profileAPI = {
 
     },
     updateStatus(status:string) {
-        return instance.put(`profile/status`,{status:status})
+        return instance.put<{ title: string }, AxiosResponse<CommonResponseType>>(`profile/status`,{status:status})
     }
 }
 
 export const authAPI = {
     auth () {
-        return instance.get('auth/me')
+        return instance.get<CommonResponseType>('auth/me')
             .then(responce => {
             return responce.data
         })
     },
     login (email:string,password:string,rememberMe:boolean) {
-        return instance.post('auth/login',{email,password,rememberMe })
+        return instance.post<LoginType,AxiosResponse<CommonResponseType>>('auth/login',{email,password,rememberMe })
             .then(res => {
                 return res.data
             })
     },
     logout ()  {
-        return instance.delete('auth/login')
+        return instance.delete<CommonResponseType>('auth/login')
             .then(res => {
                 return res.data
             })

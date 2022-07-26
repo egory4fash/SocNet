@@ -22,11 +22,12 @@ export type DialogsType = {
 export type ProfilePageType = {
     postsData: Array<PostsType>
     profile:ProfileType,
+    serverStatus:string | null
 
 }
 
 export type ProfileType = {
-    aboutMe: string,
+    aboutMe: string | null,
     contacts: {
         facebook: string | null,
         website: string | null,
@@ -44,8 +45,7 @@ export type ProfileType = {
     photos: {
         small: string | null,
         large: string | null
-    },
-    serverStatus:string | null
+    }
 }
 
 export type DialogsPageType = {
