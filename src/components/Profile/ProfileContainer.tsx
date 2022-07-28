@@ -13,7 +13,8 @@ export type ProfilePagePropsType = mapStateToPropsType & mapDispatchToPropsType
 
 export type mapStateToPropsType = {
     profile: ProfileType,
-    status: string | null
+    status: string | null,
+    id:number
 
 }
 export type mapDispatchToPropsType = {
@@ -29,7 +30,8 @@ export type PropsType = RouteComponentProps<ParamType> & ProfilePagePropsType
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.serverStatus
+        status: state.profilePage.serverStatus,
+        id: state.auth.data.id
 
     }
 }
@@ -38,8 +40,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) userId = '22112'
-
+        if (!userId) userId = this.props.id.toString()
         this.props.getUserProfileThunkCreator(userId)
     }
 

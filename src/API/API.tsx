@@ -90,7 +90,7 @@ export const profileAPI = {
 
     },
     updateStatus(status:string) {
-        return instance.put<{ title: string }, AxiosResponse<CommonResponseType>>(`profile/status`,{status:status})
+        return instance.put<{ status: string }, AxiosResponse<CommonResponseType>>(`profile/status`,{status:status})
     }
 }
 

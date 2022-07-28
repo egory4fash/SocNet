@@ -42,7 +42,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                         name={'rememberMe'}/>remember me
                 </div>
 
-                {props.error && <div className = {s.summaryError}>ERROR</div>}
+                {props.error && <div className = {s.summaryError}>{props.error}</div>}
                 <div>
                     <button>Log In</button>
                 </div>

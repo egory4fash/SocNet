@@ -81,10 +81,8 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
             if (data.resultCode === 0) {
                 dispatch(getAuthUserDataThunkCreator())
             }else {
-                console.log('asdasdasd')
-                let action = stopSubmit('login',{_error:"Common error"})
-                console.log(action)
-                dispatch(action)
+                let errorMessage = data.messages.length > 0 ? data.messages[0] : "some error"
+                dispatch(stopSubmit('login',{_error:errorMessage}))
             }
         })
     }
