@@ -7,3 +7,13 @@
     left:auto;
     right: auto;
 }
+
+.pagesBox {
+    display: flex;
+    margin: 20px;
+    justify-content: center;
+}
+
+.pages{
+    margin: 10px;
+}

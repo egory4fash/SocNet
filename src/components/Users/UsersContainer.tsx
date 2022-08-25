@@ -24,6 +24,8 @@ export type mapStateToPropsType = {
     isFetching: boolean,
     followingInProgress: boolean
 }
+
+
 export type mapDispatchToPropsType = {
     changeFollow: (id: number) => void,
     followingInProgressHandler: (followingInProgress: boolean) => void,
