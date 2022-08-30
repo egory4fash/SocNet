@@ -27,14 +27,12 @@ export const AuthReducer = (state: AuthGlobalDataType = initialAuthData, action:
     switch (action.type) {
         case "SET-USER-DATA": {
             return {...state, data: action.payload.data, isLogined: action.payload.isLogined}
-
         }
         case "CHANGE-AUTH-FETCHING": {
             return {
                 ...state, isFetching: action.payload.isFetching
             }
         }
-
         default:
             return state
     }
@@ -62,14 +60,14 @@ export const changeAuthFetching = (isFetching: boolean) => {
 
 
 export const getAuthUserDataThunkCreator = () => {
-    return (dispatch: Dispatch) => {
+    return (dispatch: Dispatch) =>
         authAPI.auth().then(data => {
             if (data.resultCode === 0) {
                 dispatch(setUserData(data.data,true))
                 dispatch(changeAuthFetching(false))
             }
         })
-    }
+
 }
 
 export type AppThunk = ThunkAction<void, ReduxStateType, unknown, AnyAction>

@@ -88,6 +88,10 @@ export type AuthDataType = {
     login: string
 }
 
+export type AppGlobalType = {
+    initialized:boolean
+}
+
 
 export type RootStateType = {
     profilePage: ProfilePageType

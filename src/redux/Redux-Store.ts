@@ -6,6 +6,7 @@ import {UsersReducer} from "./UsersReducer";
 import {AuthReducer} from "./AuthReducer";
 import thunk from "redux-thunk";
 import { reducer as formReducer } from 'redux-form'
+import {AppReducer} from "./AppReducer";
 
 
 
@@ -20,7 +21,8 @@ export let reducersBatch = combineReducers({
     sidebar:SidebarReducer,
     usersPage:UsersReducer,
     auth:AuthReducer,
-    form: formReducer
+    form: formReducer,
+    app:AppReducer
 })
 
 export let store: Store<ReduxStateType> = createStore(reducersBatch,applyMiddleware(thunk))
