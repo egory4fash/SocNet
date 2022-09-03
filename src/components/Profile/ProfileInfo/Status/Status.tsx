@@ -1,10 +1,8 @@
 import React, {ChangeEvent} from 'react'
+import {StatusPropsType} from "./StatusContainer";
 
 
-type StatusPropsType = {
-    status: string | null,
-    updateStatus:(status:string) => void
-}
+
 
 class Status extends React.Component<StatusPropsType> {
 

@@ -2,11 +2,15 @@ import React from "react";
 import classes from "./ProfileInfo.module.css";
 import {ProfilePropsType} from "../Profile";
 import {Preloader} from "../../Preloader/Preloader";
-import Status from "./Status";
+import Status from "./Status/Status";
+import {StatusContainer} from "./Status/StatusContainer";
+
 
 
 
 export const ProfileInfo = (props: ProfilePropsType) => {
+
+
 
     if (!props.profile) {
         return (
@@ -17,7 +21,7 @@ export const ProfileInfo = (props: ProfilePropsType) => {
         return (
             <div>
                <div>
-                   <Status
+                   <StatusContainer
                        status={props.status}
                        updateStatus={props.updateStatus}/>
                </div>

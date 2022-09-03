@@ -106,7 +106,6 @@ export const getUserProfileThunkCreator = (userId: string) => {
         profileAPI.getProfile(Number(userId)).then(data => {
             dispatch(setUserProfile(data))
         })
-
         profileAPI.getStatus(Number(userId)).then(status => {
             dispatch(setProfileStatus(status))
         })

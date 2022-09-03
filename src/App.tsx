@@ -13,39 +13,38 @@ import {ReduxStateType} from "./redux/Redux-Store";
 import {Preloader} from "./components/Preloader/Preloader";
 
 
-
 function App() {
-const initialized = useSelector( (state:ReduxStateType) =>state.app.initialized)
+    const initialized = useSelector((state: ReduxStateType) => state.app.initialized)
     const dispatch = useDispatch()
 
-    useEffect( () => {
-dispatch(initializeAPPThunkCreator())
-    },[dispatch])
+    useEffect(() => {
+        dispatch(initializeAPPThunkCreator())
+    }, [dispatch])
 
     return (
-        initialized?
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <HeaderContainer/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path='/Dialogs'
-                           render={() => <DialogsContainer/>}/>
+        initialized ?
+            <BrowserRouter>
+                <div className="app-wrapper">
+                    <HeaderContainer/>
+                    <Navbar/>
+                    <div className='app-wrapper-content'>
+                        <Route path='/Dialogs'
+                               render={() => <DialogsContainer/>}/>
 
-                    <Route path='/Profile/:userId?'
-                           render={() => <ProfileContainer/>}/>
+                        <Route path='/Profile/:userId?'
+                               render={() => <ProfileContainer/>}/>
 
-                    <Route path='/Users'
-                           render={() => <UsersContainer/>}/>
+                        <Route path='/Users'
+                               render={() => <UsersContainer/>}/>
 
-                    <Route path='/login'
-                           render={() => <Login/>}/>
+                        <Route path='/login'
+                               render={() => <Login/>}/>
+                    </div>
                 </div>
-            </div>
-        </BrowserRouter>
+            </BrowserRouter>
 
 
-            :<Preloader/>
+            : <Preloader/>
     )
 }
 
