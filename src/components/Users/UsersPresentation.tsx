@@ -22,31 +22,18 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = [];
 
-    for (let i = props.currentPage-2; i <= props.currentPage+2; i++) {
-        if(i <1) {
-            continue
-        }else if (i>pagesCount) {
-            break
-        }
+    for (let i = props.currentPage - 2; i <= props.currentPage + 2; i++) {
+        if (i < 1 || i > pagesCount) {
 
-        else{
-        pages.push(i)}
+        } else {
+            pages.push(i)
+        }
     }
-    // let currentPage = 1
-    // for (let i = currentPage-2; i <= currentPage+2; i++) {
-    //     if (i<1) {
-    //         continue
-    //     }else  if (i>pagesCount) {
-    //         return
-    //     }else {
-    //         pages.push(i)
-    //     }
-    // }
+
     const followChangerHandler = (userId: number, followed: boolean) => {
         props.followChanger(userId, followed)
-
     }
-debugger
+
     return (
         <div>
             {props.users.map(m =>
@@ -80,11 +67,11 @@ debugger
                     </span>
                 </div>)
             }
-            <div className = {s.pagesBox}>
-                <div className = {s.pages}>
-                {pages.map(m => <span onClick={(e) => {
-                    props.onPageChanged(m)
-                }} className={props.currentPage === m ? s.selected : ''}>{m} </span>)}
+            <div className={s.pagesBox}>
+                <div className={s.pages}>
+                    {pages.map(m => <span onClick={(e) => {
+                        props.onPageChanged(m)
+                    }} className={props.currentPage === m ? s.selected : ''}>{m} </span>)}
                 </div>
             </div>
         </div>
