@@ -1,25 +1,39 @@
-import React, {ChangeEvent, useState} from 'react'
-import {StatusPropsType} from "./StatusContainer";
+import React, {ChangeEvent, useEffect, useState} from 'react'
 
-export const StatusFunctional = (props:StatusPropsType) => {
 
-    let [editMode,setEditMode] = useState(false)
-    let [status,setStatus] = useState(props.status)
+type StatusFucnPropsType = {
+    status: string | null,
+    updateStatus: (status: string) => void,
+    myID: number,
+    profileID: number
+}
+
+export const StatusFunctional = (props: StatusFucnPropsType) => {
+
+    let [editMode, setEditMode] = useState(false)
+    let [status, setStatus] = useState(props.status)
 
 
     const editModeOnHandler = () => {
-        setEditMode(true)
+        if (props.myID === props.profileID) {
+            setEditMode(true)
+        }
     }
     const editModeOffHandler = () => {
+
         setEditMode(false)
+        props.updateStatus(status ? status : '')
     }
-    const onChangeStatusHandler = (e:ChangeEvent<HTMLInputElement>) => {
+    const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value)
-        // props.updateStatus(status?status:'')
+
     }
 
     let statusValue = status === null ? "no status yet" : props.status
 
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
 
 
     return (
@@ -34,7 +48,7 @@ export const StatusFunctional = (props:StatusPropsType) => {
                         onChange={onChangeStatusHandler}
                         autoFocus={true}
                         onBlur={editModeOffHandler}
-                        value={props.status === null ?"" : props.status}/>
+                        value={status === null ? "" : status}/>
                 </div>
             }
         </>

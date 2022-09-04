@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./ProfileInfo.module.css";
 import {ProfilePropsType} from "../Profile";
 import {Preloader} from "../../Preloader/Preloader";
-import Status from "./Status/Status";
 import {StatusContainer} from "./Status/StatusContainer";
 
 

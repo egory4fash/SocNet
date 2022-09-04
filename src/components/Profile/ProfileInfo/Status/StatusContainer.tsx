@@ -13,7 +13,15 @@ export type StatusPropsType = {
 export const StatusContainer =(props:any) => {
 
     const myID = useSelector( (state:RootStateType ) =>state.auth.data.id)
+    const profileID = useSelector( (state:RootStateType ) =>state.profilePage.profile.userId)
+
+
+
     return (
-        <StatusFunctional status={props.status} updateStatus={props.updateStatus} myID = {myID} />
+        <StatusFunctional
+            status={props.status}
+            updateStatus={props.updateStatus}
+            myID = {myID}
+        profileID={profileID}/>
     )
 }
