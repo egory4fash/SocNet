@@ -5,19 +5,10 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 import {AddPostReduxForm} from "./Posts/AddPostForm";
 
 
-type myPostsPropsType = {
-    postsData: Array<{
-        id: number,
-        message: string,
-        likesCount: number
-    }>
-    newPostText: string
-    onPostChangeTest: (text: string) => void
-    addPost: (newPost:string) => void
-}
 
 
-export function MyPosts(props: MyPostsPropsType) {
+
+export const MyPosts = React.memo((props: MyPostsPropsType)  =>{
 
 
     const postElements = props.postsData.map(elem =>
@@ -35,5 +26,5 @@ export function MyPosts(props: MyPostsPropsType) {
             {postElements}
         </div>
     </div>)
-}
+})
 
