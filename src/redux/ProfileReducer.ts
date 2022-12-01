@@ -6,13 +6,16 @@ import {profileAPI} from "../API/API";
 export type ProfilePageActionType =
     addPostACType |
     setUserProfileACType |
-    setProfileStatusACType
+    setProfileStatusACType |
+    deletePostACType
+
 
 
 
 type addPostACType = ReturnType<typeof addPost>
 type setUserProfileACType = ReturnType<typeof setUserProfile>
 type setProfileStatusACType = ReturnType<typeof setProfileStatus>
+type deletePostACType = ReturnType<typeof deletePost>
 
 
 let initialProfileState = {
@@ -63,6 +66,9 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
         case "SET-PROFILE-STATUS": {
             return  {...state, serverStatus: action.payload.status}
         }
+        case "DELETE-POST": {
+            return  {...state,postsData:[...state.postsData].filter( f => f.id !== action.payload.postId)}
+        }
 
 
         default:
@@ -95,6 +101,14 @@ export const setProfileStatus = (status: string | null) => {
         type: "SET-PROFILE-STATUS",
         payload: {
             status
+        }
+    } as const
+}
+export const deletePost = (postId:number) => {
+    return {
+        type: "DELETE-POST",
+        payload: {
+            postId
         }
     } as const
 }
