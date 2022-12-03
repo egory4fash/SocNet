@@ -1,7 +1,9 @@
 import {DialogsPageType, MessagesType} from "./State";
 
+enum DIALOGS_ACTIONS {
+    ADD_MESSAGE='DIALOGS/ADD-MESSAGE'
+}
 
-export const add_Message = "ADD-MESSAGE"
 
 export type DialogActionType = addMessageACType
 
@@ -22,7 +24,7 @@ let initialDialogState= {
 
 export const DialogsReducer = (state: DialogsPageType = initialDialogState, action: DialogActionType):DialogsPageType => {
     switch (action.type) {
-        case "ADD-MESSAGE" : {
+        case DIALOGS_ACTIONS.ADD_MESSAGE : {
             const newPostMessage: MessagesType = {
                 id: 4,
                 message: action.newMessage,
@@ -39,7 +41,7 @@ export const DialogsReducer = (state: DialogsPageType = initialDialogState, acti
 
 export const addMessageAC = (newMessage: string) => {
     return {
-        type: add_Message,
+        type: DIALOGS_ACTIONS.ADD_MESSAGE,
         newMessage: newMessage
     } as const
 }

@@ -2,6 +2,13 @@ import {PostsType, ProfilePageType, ProfileType,} from "./State";
 import {Dispatch} from "redux";
 import {profileAPI} from "../API/API";
 
+enum PROFILE_ACTIONS {
+    ADD_POST='PROFILE/ADD-POST',
+    SET_USER_PROFILE='PROFILE/SET-USER-PROFILE',
+    SET_PROFILE_STATUS='PROFILE/SET-PROFILE-STATUS',
+    DELETE_POST='PROFILE/DELETE-POST'
+}
+
 
 export type ProfilePageActionType =
     addPostACType |
@@ -52,7 +59,7 @@ let initialProfileState = {
 export const ProfileReducer = (state: ProfilePageType = initialProfileState, action: ProfilePageActionType): ProfilePageType => {
     switch (action.type) {
 
-        case "ADD-POST" : {
+        case PROFILE_ACTIONS.ADD_POST : {
             const newPost: PostsType = {
                 id: 5,
                 message: action.payload.newPostText,
@@ -60,13 +67,13 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
             }
             return {...state, postsData: [newPost,...state.postsData]}
         }
-        case "SET-USER-PROFILE": {
+        case PROFILE_ACTIONS.SET_USER_PROFILE: {
             return {...state, profile: action.payload.profile}
         }
-        case "SET-PROFILE-STATUS": {
+        case PROFILE_ACTIONS.SET_PROFILE_STATUS: {
             return  {...state, serverStatus: action.payload.status}
         }
-        case "DELETE-POST": {
+        case PROFILE_ACTIONS.DELETE_POST: {
             return  {...state,postsData:[...state.postsData].filter( f => f.id !== action.payload.postId)}
         }
 
@@ -81,7 +88,7 @@ export const ProfileReducer = (state: ProfilePageType = initialProfileState, act
 
 export const addPost = (newPostText:string) => {
     return {
-        type: "ADD-POST",
+        type: PROFILE_ACTIONS.ADD_POST,
         payload: {
             newPostText
         }
@@ -90,7 +97,7 @@ export const addPost = (newPostText:string) => {
 }
 export const setUserProfile = (profile: ProfileType) => {
     return {
-        type: "SET-USER-PROFILE",
+        type: PROFILE_ACTIONS.SET_USER_PROFILE,
         payload: {
             profile
         }
@@ -98,7 +105,7 @@ export const setUserProfile = (profile: ProfileType) => {
 }
 export const setProfileStatus = (status: string | null) => {
     return {
-        type: "SET-PROFILE-STATUS",
+        type: PROFILE_ACTIONS.SET_PROFILE_STATUS,
         payload: {
             status
         }
@@ -106,7 +113,7 @@ export const setProfileStatus = (status: string | null) => {
 }
 export const deletePost = (postId:number) => {
     return {
-        type: "DELETE-POST",
+        type: PROFILE_ACTIONS.DELETE_POST,
         payload: {
             postId
         }

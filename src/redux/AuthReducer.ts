@@ -5,6 +5,11 @@ import {ReduxStateType} from "./Redux-Store";
 import {ThunkAction} from "redux-thunk";
 import {stopSubmit} from "redux-form";
 
+enum AUTH_ACTIONS {
+    SET_USER_DATA='AUTH/SET-USER-DATA',
+    CHANGE_AUTH_FETCHING='AUTH/CHANGE-AUTH-FETCHING'
+}
+
 export type AuthActionType = SetUserDataType | ChangeAuthFetchingACType
 
 export type SetUserDataType = ReturnType<typeof setUserData>
@@ -23,12 +28,12 @@ let initialAuthData = {
     isLogined: false
 }
 
-export const AuthReducer = (state: AuthGlobalDataType = initialAuthData, action: AuthActionType): AuthGlobalDataType => {
+ const AuthReducer = (state: AuthGlobalDataType = initialAuthData, action: AuthActionType): AuthGlobalDataType => {
     switch (action.type) {
-        case "SET-USER-DATA": {
+        case AUTH_ACTIONS.SET_USER_DATA: {
             return {...state, data: action.payload.data, isLogined: action.payload.isLogined}
         }
-        case "CHANGE-AUTH-FETCHING": {
+        case AUTH_ACTIONS.CHANGE_AUTH_FETCHING: {
             return {
                 ...state, isFetching: action.payload.isFetching
             }
@@ -41,7 +46,7 @@ export const AuthReducer = (state: AuthGlobalDataType = initialAuthData, action:
 
 export const setUserData = (data: AuthDataType,isLogined:boolean) => {
     return {
-        type: "SET-USER-DATA",
+        type: AUTH_ACTIONS.SET_USER_DATA,
         payload: {
             data,
             isLogined
@@ -51,7 +56,7 @@ export const setUserData = (data: AuthDataType,isLogined:boolean) => {
 
 export const changeAuthFetching = (isFetching: boolean) => {
     return {
-        type: "CHANGE-AUTH-FETCHING",
+        type: AUTH_ACTIONS.CHANGE_AUTH_FETCHING,
         payload: {
             isFetching
         }
@@ -102,3 +107,5 @@ export const logOutThunkCreator = () => {
             })
     }
 }
+
+export default AuthReducer
