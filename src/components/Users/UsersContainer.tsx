@@ -1,10 +1,10 @@
 import {connect} from "react-redux";
 import {RootStateType, UsersType} from "../../redux/State";
 import {
-    changeFollow,
-    followingInProgressHandler, followThunkCreator,
+    changeFollow, fetchFollowThunkCreator,
+    followingInProgressHandler,
     getUsersThunkCreator,
-    onPageChangeThunkCreator, unFollowThunkCreator,
+    onPageChangeThunkCreator
 } from "../../redux/UsersReducer";
 import React from "react";
 import {UsersPresentation} from "./UsersPresentation";
@@ -19,6 +19,7 @@ import {
     getUsers,
     totalUsersCount
 } from "../../redux/UsersSelector";
+
 
 
 
@@ -39,8 +40,7 @@ export type mapDispatchToPropsType = {
     followingInProgressHandler: (followingInProgress: boolean) => void,
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void,
     onPageChangeThunkCreator: (currentPage: number, pageSize: number) => void,
-    unFollowThunkCreator: (userId: number, followed: boolean) => void,
-    followThunkCreator: (userId: number, followed: boolean) => void
+    fetchFollowThunkCreator:(usedId:number,followed:boolean,APIMethod:any) => void
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
@@ -64,12 +64,12 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
 
     }
 
-    onPageChanged = (pageNumber: number,) => {
+    onPageChanged = (pageNumber: number) => {
         this.props.onPageChangeThunkCreator(pageNumber, this.props.pageSize)
     }
 
     followChanger = (userId: number, followed: boolean) => {
-        followed ? this.props.unFollowThunkCreator(userId,followed) : this.props.followThunkCreator(userId, followed)
+        followed ? this.props.fetchFollowThunkCreator(userId,followed,'unfollow') : this.props.fetchFollowThunkCreator(userId,followed,'follow')
     }
 
 
@@ -106,8 +106,7 @@ export default compose<React.ComponentType> (
         followingInProgressHandler,
         getUsersThunkCreator,
         onPageChangeThunkCreator,
-        unFollowThunkCreator,
-        followThunkCreator
+        fetchFollowThunkCreator
     }),
     WithAuthRedirect
 ) (usersClassAPI)

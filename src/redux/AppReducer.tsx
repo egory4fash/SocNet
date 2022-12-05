@@ -1,18 +1,23 @@
 import {AppGlobalType} from "./State";
-import {AppThunk, getAuthUserDataThunkCreator} from "./AuthReducer";
+import {getAuthUserDataThunkCreator} from "./AuthReducer";
+import {AppThunk} from "./Redux-Store";
+
+enum APP_ACTIONS {
+    APP_INITIALIZED = 'APP/App-INITIALIZED'
+}
 
 let initialAppState = {
     initialized: false
 }
 
- type AppActionType = AppinitializedACType
+type AppActionType = AppinitializedACType
 
 
 type AppinitializedACType = ReturnType<typeof appInitializedAC>
 
-export const AppReducer = (state: AppGlobalType = initialAppState, action: AppActionType): AppGlobalType => {
+const AppReducer = (state: AppGlobalType = initialAppState, action: AppActionType): AppGlobalType => {
     switch (action.type) {
-        case "APP/APP-INITIALIZED": {
+        case APP_ACTIONS.APP_INITIALIZED: {
             return {...state, initialized: action.payload.initialized}
         }
         default:
@@ -20,21 +25,19 @@ export const AppReducer = (state: AppGlobalType = initialAppState, action: AppAc
     }
 }
 
-export const appInitializedAC = (initialized:boolean) => {
-    return {type:"APP/APP-INITIALIZED",
-    payload:{
-        initialized
-    }} as const
+export const appInitializedAC = (initialized: boolean) => {
+    return {
+        type: APP_ACTIONS.APP_INITIALIZED,
+        payload: {
+            initialized
+        }
+    } as const
 }
 
-export const initializeAPPThunkCreator = ():AppThunk => {
-    return (dispatch) => {
-        dispatch(getAuthUserDataThunkCreator()).then( () => {
-            dispatch(appInitializedAC(true))
-
-        })
-
-
+export const initializeAPPThunkCreator = (): AppThunk => {
+    return async (dispatch) => {
+        await dispatch(getAuthUserDataThunkCreator())
+        dispatch(appInitializedAC(true))
     }
 }
 

@@ -17,40 +17,48 @@ type UsersPresentationPropsType = {
     followingInProgressHandler: (followingInProgress: boolean) => void
 }
 
-export const UsersPresentation = (props: UsersPresentationPropsType) => {
+export const UsersPresentation = ({
+                                      totalUsersCount,
+                                      pageSize,
+                                      currentPage,
+                                      followChanger,
+                                      followingInProgress,
+                                      onPageChanged,
+                                      users,
+                                      ...props
+
+                                  }: UsersPresentationPropsType) => {
 
 
-
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount = Math.ceil(totalUsersCount / pageSize)
     let pages = [];
-
-    for (let i = props.currentPage - 2; i <= props.currentPage + 2; i++) {
+    for (let i = currentPage - 2; i <= currentPage + 2; i++) {
         if (i < 1 || i > pagesCount) {
-
         } else {
             pages.push(i)
         }
     }
 
     const followChangerHandler = (userId: number, followed: boolean) => {
-        props.followChanger(userId, followed)
+        followChanger(userId, followed)
     }
 
     return (
         <div>
-            {props.users.map(m =>
+            {users.map(m =>
                 <div key={m.id}>
                         <span>
                             <div>
-                                <NavLink to={'/profile' + '/' + m.id}>
+                                <NavLink to={'/profile/' + m.id}>
                                 <img
                                     src={m.photos.small ? m.photos.small : 'https://png.pngtree.com/png-vector/20191101/ourmid/pngtree-cartoon-color-simple-male-avatar-png-image_1934459.jpg'}
-                                    height={'100px'} width={'100px'}/>
+                                    height={'100px'} width={'100px'}
+                                    alt='user face'/>
                                     </NavLink>
                             </div>
                             <div>
                                     <button onClick={(e) => followChangerHandler(m.id, m.followed)}
-                                            disabled={props.followingInProgress}>
+                                            disabled={followingInProgress}>
                                         {m.followed ? 'Unfollow' : 'Follow'}
                                     </button>
 
@@ -63,7 +71,7 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
                             <div>{m.status}</div>
                         </span>
                         <span>
-                            <div>{m.followed ? 'Followed!!!' : "Nope"}</div>
+                            <div>{m.followed ? 'You are Followed!!!' : "Nope"}</div>
                             <div>{'m.location.country'}</div>
                         </span>
                     </span>
@@ -72,8 +80,8 @@ export const UsersPresentation = (props: UsersPresentationPropsType) => {
             <div className={s.pagesBox}>
                 <div className={s.pages}>
                     {pages.map(m => <span onClick={(e) => {
-                        props.onPageChanged(m)
-                    }} className={props.currentPage === m ? s.selected : ''}>{m} </span>)}
+                        onPageChanged(m)
+                    }} className={currentPage === m ? s.selected : ''}>{m} </span>)}
                 </div>
             </div>
         </div>

@@ -22,15 +22,14 @@ let initialDialogState= {
     ]
 }
 
-export const DialogsReducer = (state: DialogsPageType = initialDialogState, action: DialogActionType):DialogsPageType => {
+ const DialogsReducer = (state: DialogsPageType = initialDialogState, action: DialogActionType):DialogsPageType => {
     switch (action.type) {
         case DIALOGS_ACTIONS.ADD_MESSAGE : {
             const newPostMessage: MessagesType = {
                 id: 4,
                 message: action.newMessage,
             }
-            let newState = {...state}
-            return {...newState,messagesData:newState.messagesData=[...newState.messagesData,newPostMessage]}
+            return {...state,messagesData:state.messagesData=[...state.messagesData,newPostMessage]}
         }
         default:
             return state
@@ -45,6 +44,8 @@ export const addMessageAC = (newMessage: string) => {
         newMessage: newMessage
     } as const
 }
+
+export default DialogsReducer
 
 
 

@@ -31,7 +31,7 @@ type GetUsersResponseType = {
     totalCount: number,
     error: string | null
 }
-type CommonResponseType = {
+export type CommonResponseType = {
     data:AuthDataType ,
     messages: Array<string>,
     fieldsErrors: Array<string>,

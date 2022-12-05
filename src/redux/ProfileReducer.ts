@@ -56,7 +56,7 @@ let initialProfileState = {
 
 }
 
-export const ProfileReducer = (state: ProfilePageType = initialProfileState, action: ProfilePageActionType): ProfilePageType => {
+ const ProfileReducer = (state: ProfilePageType = initialProfileState, action: ProfilePageActionType): ProfilePageType => {
     switch (action.type) {
 
         case PROFILE_ACTIONS.ADD_POST : {
@@ -123,24 +123,20 @@ export const deletePost = (postId:number) => {
 
 
 export const getUserProfileThunkCreator = (userId: string) => {
-    return (dispatch: Dispatch) => {
-        profileAPI.getProfile(Number(userId)).then(data => {
+    return async (dispatch: Dispatch) => {
+        let data = await profileAPI.getProfile(Number(userId))
             dispatch(setUserProfile(data))
-        })
-        profileAPI.getStatus(Number(userId)).then(status => {
+        let status = await profileAPI.getStatus(Number(userId))
             dispatch(setProfileStatus(status))
-        })
     }
 }
 
 export const updateStatusThunkCreator = (status:string) => {
-    return (dispatch:Dispatch) => {
-        profileAPI.updateStatus(status).then(res => {
+    return async (dispatch:Dispatch) => {
+        let res = await profileAPI.updateStatus(status)
             if (res.data.resultCode === 0)
             {dispatch(setProfileStatus(status))}
-
-
-        })
     }
 }
 
+export default ProfileReducer

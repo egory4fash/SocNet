@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -23,28 +23,25 @@ function App() {
 
     return (
         initialized ?
-            <BrowserRouter>
-                <div className="app-wrapper">
-                    <HeaderContainer/>
-                    <Navbar/>
-                    <div className='app-wrapper-content'>
-                        <Route path='/Dialogs'
-                               render={() => <DialogsContainer/>}/>
+            <div className="app-wrapper">
+                <HeaderContainer/>
+                <Navbar/>
+                <div className='app-wrapper-content'>
+                    <Route path='/Dialogs'
+                           render={() => <DialogsContainer/>}/>
 
-                        <Route path='/Profile/:userId?'
-                               render={() => <ProfileContainer/>}/>
+                    <Route path='/Profile/:userId?'
+                           render={() => <ProfileContainer/>}/>
 
-                        <Route path='/Users'
-                               render={() => <UsersContainer/>}/>
+                    <Route path='/Users'
+                           render={() => <UsersContainer/>}/>
 
-                        <Route path='/login'
-                               render={() => <Login/>}/>
-                    </div>
+                    <Route path='/login'
+                           render={() => <Login/>}/>
                 </div>
-            </BrowserRouter>
-
-
-            : <Preloader/>
+            </div>
+            :
+            <Preloader/>
     )
 }
 
