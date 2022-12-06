@@ -7,7 +7,7 @@ import {
     onPageChangeThunkCreator
 } from "../../redux/UsersReducer";
 import React from "react";
-import {UsersPresentation} from "./UsersPresentation";
+import {UserContainer} from "./User/UserContainer";
 import {Preloader} from "../Preloader/Preloader";
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -78,7 +78,7 @@ class usersClassAPI extends React.Component<UsersPagePropsType> {
         return (
             <>
                 {!this.props.isFetching ?
-                    <UsersPresentation
+                    <UserContainer
                         totalUsersCount={this.props.totalUsersCount}
                         pageSize={this.props.pageSize}
                         onPageChanged={this.onPageChanged}
