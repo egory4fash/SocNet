@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -22,7 +22,9 @@ function App() {
     }, [dispatch])
 
     return (
+
         initialized ?
+            <BrowserRouter>
             <div className="app-wrapper">
                 <HeaderContainer/>
                 <Navbar/>
@@ -40,8 +42,10 @@ function App() {
                            render={() => <Login/>}/>
                 </div>
             </div>
+            </BrowserRouter>
             :
             <Preloader/>
+
     )
 }
 
