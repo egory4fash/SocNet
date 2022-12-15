@@ -15,6 +15,7 @@ import {Preloader} from "./components/Preloader/Preloader";
 
 function App() {
     const initialized = useSelector((state: ReduxStateType) => state.app.initialized)
+    const isLoggedIn = useSelector((state: ReduxStateType) => state.auth.isLogined)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -26,26 +27,30 @@ function App() {
         initialized ?
             <BrowserRouter>
             <div className="app-wrapper">
-                <HeaderContainer/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path='/Dialogs'
-                           render={() => <DialogsContainer/>}/>
+                {isLoggedIn ? <>
+                    <HeaderContainer/>
+                    <Navbar/>
+                    <div className='app-wrapper-content'>
+                        <Route path='/'
+                               render={() => <ProfileContainer/>}/>
+                        <Route path='/Dialogs'
+                               render={() => <DialogsContainer/>}/>
 
-                    <Route path='/Profile/:userId?'
-                           render={() => <ProfileContainer/>}/>
+                        <Route path='/Profile/:userId?'
+                               render={() => <ProfileContainer/>}/>
 
-                    <Route path='/Users'
-                           render={() => <UsersContainer/>}/>
+                        <Route path='/Users'
+                               render={() => <UsersContainer/>}/>
 
-                    <Route path='/login'
-                           render={() => <Login/>}/>
-                </div>
+                        <Route path='/login'
+                               render={() => <Login/>}/>
+                    </div>
+                </> : <Login/> }
+
             </div>
             </BrowserRouter>
             :
             <Preloader/>
-
     )
 }
 
