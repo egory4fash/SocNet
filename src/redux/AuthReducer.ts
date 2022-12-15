@@ -65,13 +65,11 @@ export const changeAuthFetching = (isFetching: boolean) => {
 
 export const getAuthUserDataThunkCreator = () => {
     return async (dispatch: Dispatch) => {
-        debugger
         let data = await authAPI.auth()
         if (data.resultCode === 0) {
             dispatch(setUserData(data.data, true))
             dispatch(changeAuthFetching(false))
         }
-
     }
 }
 

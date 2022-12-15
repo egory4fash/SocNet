@@ -17,7 +17,7 @@ export const Login = () => {
     const onSubmit = (formData:FormDataType) => {
         dispatch(loginThunkCreator(formData.email,formData.password,formData.rememberMe))
     }
-
+    console.log(isLogined)
     if (isLogined) {
         return <Redirect to={'/profile'} />
     }
