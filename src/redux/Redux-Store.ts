@@ -7,6 +7,7 @@ import AuthReducer from "./AuthReducer";
 import DialogsReducer from "./DialogsReducer";
 import AppReducer from "./AppReducer";
 import ProfileReducer from "./ProfileReducer";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 
 
@@ -26,9 +27,10 @@ export let reducersBatch = combineReducers({
     app:AppReducer
 })
 
-export let store: Store<ReduxStateType> = createStore(reducersBatch,applyMiddleware(thunk))
+// export let store: Store<ReduxStateType> = createStore(reducersBatch,applyMiddleware(thunk))
 export type AppThunk = ThunkAction<void, ReduxStateType, unknown, AnyAction>
-
+export const store: Store<ReduxStateType> = createStore(reducersBatch, composeWithDevTools(
+    applyMiddleware(thunk)))
 //@ts-ignore
 window.store = store
 
