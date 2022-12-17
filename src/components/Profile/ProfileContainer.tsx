@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {ProfileType, RootStateType} from "../../redux/State";
 import {getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/ProfileReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-
 import {compose} from 'redux';
 import {WithAuthRedirect} from "../../hoc/withAuthRedirect";
 

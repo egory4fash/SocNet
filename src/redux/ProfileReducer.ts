@@ -76,14 +76,10 @@ let initialProfileState = {
         case PROFILE_ACTIONS.DELETE_POST: {
             return  {...state,postsData:[...state.postsData].filter( f => f.id !== action.payload.postId)}
         }
-
-
         default:
             return state
     }
-
 }
-
 
 
 export const addPost = (newPostText:string) => {

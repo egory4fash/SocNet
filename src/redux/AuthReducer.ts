@@ -66,6 +66,14 @@ export const getAuthUserDataThunkCreator = () => {
     return async (dispatch: Dispatch) => {
         let data = await authAPI.auth()
         try {
+            data.resultCode === 0
+                ? dispatch(setUserData(data.data, true))
+                : dispatch(setUserData(data.data, false))
+        } catch (e) {
+            // error handling
+        }
+        dispatch(changeAuthFetching(false))
+        try {
             data.resultCode === 0 ?  dispatch(setUserData(data.data, true))
             :dispatch(setUserData(data.data, false))
         }

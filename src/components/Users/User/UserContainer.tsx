@@ -34,6 +34,7 @@ export const UserContainer = ({
     let pages: number[] = [];
     for (let i = currentPage - 2; i <= currentPage + 2; i++) {
         if (i < 1 || i > pagesCount) {
+
         } else {
             pages.push(i)
         }

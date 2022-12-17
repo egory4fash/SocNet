@@ -16,6 +16,7 @@ import {Preloader} from "./components/Preloader/Preloader";
 function App() {
     const initialized = useSelector((state: ReduxStateType) => state.app.initialized)
     const isLoggedIn = useSelector((state: ReduxStateType) => state.auth.isLogined)
+    const iD = useSelector((state: ReduxStateType) => state.auth.data.id)
     const dispatch = useDispatch()
 
     useEffect(() => {
